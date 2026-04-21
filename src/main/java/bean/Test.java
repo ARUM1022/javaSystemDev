@@ -3,58 +3,60 @@ package bean;
 import java.io.Serializable;
 
 public class Test implements Serializable {
-	
-	private String Student_No;
-	
-	private String Subject_Cd;
-	
-	private String School_Cd;
-	
+	//学生番号//
+	private Student student;
+	//クラス番号//
+	private String classNum;
+	//科目コード//
+	private Subject subject;
+	//学校コード//
+	private School school;
+	//回数//
 	private int no;
+	//得点//
+	private int point;
 	
-	private int Point;
 	
-	private String Class_Num;
 	
-	public String getStudent_No() {
-		return Student_No;
+	public Student getStudent() {
+		return student;
 	}
-	public void setStudent(String Stundet_No) {
-		this.Student_No = Stundet_No;
-	}
-	
-	public String getSubject_Cd() {
-		return Subject_Cd;
-	}
-	public void setSubject_Cd(String Subject_Cd) {
-		this.Subject_Cd = Subject_Cd;
+	public void setStudent(Student stundet) {
+		this.student = stundet;
 	}
 	
-	public String getSchool_Cd() {
-		return School_Cd;
+	public String getClassNum() {
+		return classNum;
 	}
-	public void setSchool_Cd(String School_Cd) {
-		this.School_Cd = School_Cd;
+	public void setClassNum(String classNum) {
+		this.classNum = classNum;
 	}
 	
-	public int getno() {
+	public Subject getSubject() {
+		return subject;
+	}
+	public void setSubject(Subject subject) {
+		this.subject = subject;
+	}
+	
+	public School getSchool() {
+		return school;
+	}
+	public void setSchool(School school) {
+		this.school = school;
+	}
+	
+	public int getNo() {
 		return no;
 	}
-	public void setno(int no) {
+	public void setNo(int no) {
 		this.no = no;
 	}
 	
 	public int getPoint() {
-		return Point;
+		return point;
 	}
-	public void setPoint(int Point) {
-		this.Point = Point;
-	}
-	
-	public String getClass_Num() {
-		return Class_Num;
-	}
-	public void setClass_Num(String Class_Num) {
-		this.Class_Num = Class_Num;
+	public void setPoint(int point) {
+		this.point = point;
 	}
 }

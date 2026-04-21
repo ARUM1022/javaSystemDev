@@ -5,32 +5,32 @@ import java.io.Serializable;
 public class Subject implements Serializable {
 	
 	//学校コード String
-	private String School_Cd;
-	//科目コード String//
 	private String cd;
-	//科目名 String//
+	//科目コード String//
 	private String name;
+	//科目名 String//
+	private School school;
 	
-	public String getSchool_Cd() {
-		return School_Cd;
-	}
-	
-	public void setSchool_Cd(String School_Cd) {
-		this.School_Cd = School_Cd;
-	}
-	public String getcd() {
+	public String getCd() {
 		return cd;
 	}
 	
-	public void setcd(String cd) {
+	public void setCd(String cd) {
 		this.cd = cd;
 	}
-	
-	public String getname() {
+	public String getName() {
 		return name;
 	}
 	
-	public void setname(String name) {
+	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public School getSchool() {
+		return school;
+	}
+	
+	public void setSchool(School school) {
+		this.school = school;
 	}
 }
