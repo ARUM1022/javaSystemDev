@@ -1,7 +1,8 @@
 package bean;
 
-import java.io.Serializable;
 
+import java.io.Serializable;
+ 
 public class ClassNum implements Serializable{
 	
 	/**
