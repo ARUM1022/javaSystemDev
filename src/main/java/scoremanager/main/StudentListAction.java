@@ -13,18 +13,17 @@ import dao.ClassNumDao;
 import dao.StudentDao;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import tool.Action;
 
 public class StudentListAction extends Action {
 	
 	@Override
 	public void execute(HttpServletRequest req,HttpServletResponse res) throws Exception{
-		HttpSession session = req.getSession();//セッション
+//		HttpSession session = req.getSession();//セッション
 		//セッション属性の準備
 //		Teacher teacher = (Teacher)session.getAttribute("user");
 		//セッション属性のuser情報をTeacherオブジェクト変数に代入
-		//Teacher teacher = (Teacheer)session.getAttribute("user")
+//		Teacher teacher = (Teacheer)session.getAttribute("user")
 		
 		//一時的にスクールオブジェクトを実体化する
 		School school =  new School();
@@ -52,7 +51,6 @@ public class StudentListAction extends Action {
 		StudentDao sDao = new StudentDao();//学生Dao
 		ClassNumDao cNumDao = new ClassNumDao();//クラス番号Daoを初期化
 		Map<String, String> errors = new HashMap<>();//エラーメッセージ	
-//		students = 
 		
 		//リクエストパラメータの取得２
 		entYearStr = req.getParameter("f1");//入力された入学年度
