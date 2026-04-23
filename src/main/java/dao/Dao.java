@@ -4,11 +4,11 @@ import java.sql.Connection;
 
 import javax.sql.DataSource;
 
-public class Dao {
+public class Dao{
 	static DataSource ds;
 	
-	public Connection getConnection() throws Exception {
-		// データベースへのコネクションを返却ｗｗｗ
+	public Connection getConnection() throws Exception{
+		//データベースへのコネクションを返却
 		return ds.getConnection();
 	}
 }
