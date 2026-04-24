@@ -46,7 +46,3 @@ ${param.scripts}
 	</div>
 </body>
 </html>
-<<<<<<< HEAD
-=======
-</html>
->>>>>>> branch 'master' of https://github.com/ARUM1022/javaSystemDev.git
