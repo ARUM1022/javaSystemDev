@@ -20,7 +20,7 @@
     <div class="col d-flex align-items-center justify-content-center mx-2 rounded shadow"
         style="height: 10rem; background-color: #bdb;">
      <div>
-      <div class="">成績管理</div>
+      <a href="test_regist.jsp">成績管理</a>
       <div class="">
        <a href="TestRegit.action">成績登録</a>
       </div>

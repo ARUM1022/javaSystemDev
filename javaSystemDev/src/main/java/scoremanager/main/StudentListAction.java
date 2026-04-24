@@ -93,5 +93,8 @@ public class StudentListAction extends Action {
 			// 全学年情報を取得
 			students = sDao.filter(teacher.getSchool(),isAttend);
 		}
+		//JSPへフォワード
+	    req.getRequestDispatcher("student_list.jsp").forward(req, res);
+
 	}	
 }
