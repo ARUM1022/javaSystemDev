@@ -102,6 +102,61 @@ public class TestDao extends Dao{
 				}
 				return list;
 	}
+	public boolean save(List<test> list) throws Exception{
+		//コネクションを確立
+		Connection connection = getConnection();
+		//プリペアードステートメント
+		PreparedStatement statement = null;
+		//実行件数
+		int count = 0;
+		try { 
+			list.forEach{
+			//データベースから得点を取得
+				Test old = get(test.Getpoint());
+				if (old == null) {
+			//得点が存在しなかった場合
+			//プリペアードステートメントにINSERT文をセット
+					statement = connection.prepareStatement(
+							"insert into test(student_no, subject_cd, school_cd, no, point, class_num) values(?, ?, ?, ?, ?, ?)");
+			//プリペアードステートメントに値をバインド
+					statement.setString(1,test.getStudentNo());
+					statement.setString(2,test.getSubjectCd());
+					statement.setString(3,test.getSchoolCd());
+					statement.setInt(4,test.getNo());
+					statement.setInt(5,test.getPoint());
+					statement.setInt(6.test.getClassNum());
+				} else {
+			//得点が存在した場合
+			//プリペアードステートメントにUPDATE文をセット
+					statement = connection.prepareStatement(
+							"update student set student_no=?, subject_cd=?, school_cd=?, no=?, point=?, class_num=?");
+						//プリペアードステートメントに値をバインド
+					statement.setString(1,test.getStudentNo());
+					statement.setString(2,test.getSubjectCd());
+					statement.setString(3,test.getSchoolCd());
+					statement.setInt(4,test.getNo());
+					statement.setInt(5,test.getPoint());
+					statement.setInt(6.test.getClassNum());	
+				} 
+			//プリペアードステートメントを実行
+				count = statement.executeUpdate();
+			}
+				//後始末
+			statement.close();
+			connection.close();
+		} catch(Exception e) { 
+			throw e;
+		} finally {
+				
+			if(count > 0) {
+				//実行件数が1件以上ある場合
+				return true;
+			}else { 
+				//実行件数が０件の場合
+				return false;
+			}
+			
+	}
 	
 	
 	
