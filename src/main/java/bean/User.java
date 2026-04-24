@@ -10,7 +10,7 @@ public class User{
 	/**
 	 * ゲッター、セッター
 	 */
-	public boolean isAuthenticated() {
+	public boolean isAutentivated() {
 		return isAuthenticated;
 	}
 	public void setAuthenticated(boolean isAuthenticated) {

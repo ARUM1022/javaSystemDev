@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		try {
 			String path = req.getServletPath().substring(1);
-			String name = path.replace(".action","Action").replace("/",".");
+			String name = path.replace(".a","A").replace("/",".");
 			
 			System.out.println("★ servlet path ->" + req.getServletPath());
 			System.out.println("★ class name ->" + name);
@@ -25,7 +25,7 @@ import jakarta.servlet.http.HttpServletResponse;
 			//アクションクラスのインスタンスを返却
 			Action action = (Action) Class.forName(name).getDeclaredConstructor().newInstance();
 			
-			//遷移先URLを取得
+			//遷移先URLをスh得
 			action.execute(req, res);
 			//String url = action.execute(req,res);
 			//req.getReqestDispatcher(url).forward(req,res);
@@ -36,4 +36,5 @@ import jakarta.servlet.http.HttpServletResponse;
 			req.getRequestDispatcher("/error.jsp").forward(req,res);
 		}
 	}
+	
 }

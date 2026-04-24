@@ -11,7 +11,7 @@
 
 <c:param name="content">
  <section class="me=4">
-  <h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">学生管理</h2>
+  <h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績管理</h2>
   <div class="my-2 text-end px-4">
  	<a href="StudentCreate.action">新規登録</a>
   </div>
@@ -55,7 +55,7 @@
   
   <c:choose>
    <c:when test="${student.size()>0 }">
-    <div>検索結果:${students.size() }件</div>
+    <div>検索結果:${students.size() }剣</div>
     <table class="table table-hover">
      <tr>
       <th>入学年度</th>
@@ -87,7 +87,7 @@
      </tr>
     </c:forEach>
     </table>
-   </c:when>   
+   </c:when>
    <c:otherwise>
     <div>学生情報が存在しませんでした。</div>
    </c:otherwise>

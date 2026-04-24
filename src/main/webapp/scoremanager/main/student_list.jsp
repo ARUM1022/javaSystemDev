@@ -55,7 +55,7 @@
   
   <c:choose>
    <c:when test="${student.size()>0 }">
-    <div>検索結果:${students.size() }件</div>
+    <div>検索結果:${students.size() }剣</div>
     <table class="table table-hover">
      <tr>
       <th>入学年度</th>
@@ -87,7 +87,7 @@
      </tr>
     </c:forEach>
     </table>
-   </c:when>   
+   </c:when>
    <c:otherwise>
     <div>学生情報が存在しませんでした。</div>
    </c:otherwise>
