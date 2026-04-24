@@ -112,8 +112,8 @@ public class TestDao extends Dao{
 		try { 
 			list.forEach{
 			//データベースから得点を取得
-				Test old = get(test.Getpoint());
-				if (old == null) {
+				boolean old = Save(test,connection);
+				if (old == false) {
 			//得点が存在しなかった場合
 			//プリペアードステートメントにINSERT文をセット
 					statement = connection.prepareStatement(
@@ -157,6 +157,44 @@ public class TestDao extends Dao{
 			}
 			
 	}
-	
-	
+	//Saveメソッド(private)
+	private boolean Save(Test test.Connection connection) throws Exception{
+
+		boolean bl = new boolean();
+		//データベースへのコネクションを確立
+		Connection connection = getConnection();
+		//プリペアードステートメント
+		PreparedStatement statement = null;
+		
+		try {
+			//プリペアードステートメントにSQL文をセット
+			statement = connection.prepareStatement(
+				"select point from test where student_no=? and subject_cd=? and school_cd=? and no=?");
+			//プリペアードステートメントに学生番号をバインド
+			statement.setString(1,student_no);
+			statement.setString(2,subject_cd);
+			statement.setString(3,school_cd);
+			statement.setInt(4,no);
+				//プリペアードステートメントを実行
+			ResultSet rSet = statement.executeQuery();
+			if(rSet.next()!=null) {
+				bl=true;
+			} else {
+				bl=false;
+				}
+			}catch (Exception e){
+				throw e;
+			}finally{
+				//プリペアードステートメントを閉じる
+				if( connection != null) {
+					try {
+						statement.close();
+					}catch (SQLException sqle){
+						throw sqle;
+					}
+				}
+			}
+			return bl;
+		}
+	}
 	
