@@ -27,7 +27,8 @@ public class TeacherDao extends Dao{
 			//プリペアードステートメントに学生番号をバインド
 			statement.setString(1,id);
 			//プリペアードステートメントを実行
-			teacher = statement.executeQuery();
+			resultset rs = statement.executeQuery();
+			teacher.setName(rs.getString("name"));
 			//後始末
 			statement.close();
 			connection.close();

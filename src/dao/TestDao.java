@@ -17,7 +17,7 @@ public class TestDao extends Dao{
 
 //Get メソッド
 	private Test Get(Student student,Subject subject,School school,int no) throws Exception{
-		//Teacher初期化
+		//Test初期化
 		Test test = new Test();
 		//データベースへのコネクションを確立
 		Connection connection = getConnection();
@@ -32,7 +32,8 @@ public class TestDao extends Dao{
 			statement.setString(3,school.getCd);
 			statement.setInt(4,no);
 			//プリペアードステートメントを実行
-			test = statement.executeQuery();
+			resultset rs = statement.executeQuery();
+			test.setInt(rs.getInt("POINT"));
 			//後始末
 			statement.close();
 			connection.close();
@@ -73,25 +74,26 @@ public class TestDao extends Dao{
 				//リザルトセット
 				ResultSet rSet = null;
 				try {
+				//entYearから学生番号特定
 					statement = connection.prepareStatement(
 							"select NO from student where ent_year=?");
 					statement.setString(1,school.getEntYear());
 					rSet = statement.executeQuery();
+					//学生ごとのデータ出す
 					while (rSet.next()) {
 						//プリペアードステートメントにSQL文をセット
 					statement = connection.prepareStatement(
-						"select POINT from test where school_cd=?and class_num=? and subject_cd=? and ent_year=?");
+						"select POINT from test where school_cd=?and class_num=? and subject_cd=? and student_no=?");
 					//プリペアードステートメントにバインド
 					statement.setString(1,school.getCd());
 					statement.setString(2,classNum.getClassNum()));
 					statement.setString(3,subject.getCd());
-					statement.setstring
+					statement.setInttring(4.rSet.getInt());
 					//プライベートステートメントを実行
 					rSet = statement.executeQuery();
 					//リストへの格納処理を実行
 					list = postFilter(rSet,school);	
-					}
-									
+					}				
 					//後始末
 					statement.close();
 					connection.close();
@@ -100,5 +102,6 @@ public class TestDao extends Dao{
 				}
 				return list;
 	}
+	
 	
 	
