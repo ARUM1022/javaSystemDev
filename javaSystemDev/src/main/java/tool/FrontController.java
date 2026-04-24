@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
  public class FrontController extends HttpServlet{
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		try {
 			String path = req.getServletPath().substring(1);
 			String name = path.replace(".action","Action").replace("/",".");

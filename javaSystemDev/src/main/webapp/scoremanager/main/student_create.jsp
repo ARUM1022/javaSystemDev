@@ -22,8 +22,9 @@
  <%-- <% if (user != null && user.isAuthenticated()){ %> --%>
   <form action="StudentCreateExecute.action" method="post">
   <label>入学年度</label>
-  <select class="form-select" name="ent_year" required oninvalid = "入学年度を選択してください">
-   <option>--------</option>
+  <div>
+  <select class="form-select" name="ent_year">
+   <option value = "0">--------</option>
          <%
          for (int i = currentYear -10;i <= currentYear;i++){
          %>
@@ -33,7 +34,11 @@
          <%
          }
          %>
+         <c:if test="${yearError == true}">
+         	<p style="color:yellow;">入学年度を選択してください</p>
+         </c:if>
   </select><br>
+  </div>
   <label>学生番号</label>
    <input type ="text" class="form-control" name="no" value="${ no}" required oninvalid = "this.setCustomValidity('このフィールドを入力してください')" oninput="this.setCustomValidity('')"/>
   <br>
@@ -44,14 +49,14 @@
   <label>クラス</label>
 
   <select name="class_num" class="form-select">
-   <c:forEach var="s" items="${List}">
-    <option value="${List}"></option>
+   <c:forEach var="s" items="${classList}">
+    <option value="${s}">${s}</option>
    </c:forEach>
   </select><br>
     <button  class="btn btn-secondary" action ="submit">登録して終了</button>
-  <%--<% } else{--%>--%>
+  <%--<% } else{--%>
   <a href="Login.action">この機能を使うにはログインしてください</a>
-  <%--<% } --%> --%>
+  <%--<% } --%>
   </form>
 </section>
 </c:param>

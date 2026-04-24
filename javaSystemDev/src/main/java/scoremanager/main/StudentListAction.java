@@ -38,6 +38,7 @@ public class StudentListAction extends Action {
 		teacher.setPassword("password");
 		teacher.setName("管理者");
 		teacher.setSchool(school);
+
 		
 		//ローカル変数の指定
 		String entYearStr = "";//入力された入学年度
