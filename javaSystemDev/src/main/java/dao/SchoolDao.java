@@ -1,67 +1,46 @@
 package dao;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-
+import java.sql.SQLExeption;
 import bean.School;
 
 public class SchoolDao extends Dao{
-	/**
-	 * getメソッド　学校コードを指定して学校氏ンスタンスを一見取得する
-	 * 
-	 * @pram cd:String cd:String
-	 * 						学校コード;
-	 * @rerutn 学校クラスのインスタンス存在しない場合はnul
-	 * @throws Exception
-	 */
-	public School get(String cd) throws Exception{
-		//学校インスタンスを初期化
-		School school = new School();
-		//データベースへのコネクションを確率
-		Connection connection = getConnection();
-		//プリペアードステートメント
-		PreparedStatement statement = null;
-		
-		try {
-			//プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement("subject * from school where cd = ?");
-			//プリペアードステートメントに学校コードをバインド
-			statement.setString(1, cd);
-			//プリペアードステートメントヲ実行
-			ResultSet rSet = statement.executeQuery();
-			
-			if(rSet.next()) {
-				//リザルトセットが存在する場合
-				//学校インスタンスに画工コードと学校名をセット
-				school.setCd(rSet.getString("cd"));
-				school.setName(rSet.getString("name"));
-			}else {
-				//存在しない場合
-				//学校インスタスにnullをセット
-				school =null;
+	School school =new School();
+	Connection connection=getConnection();
+	PreparedStatement statement= null;
+	try {
+		statement = connection.prepareStatement("select * from school where cd=?");
+		statement.setString(1,school.getCd())
+		ResultSet rSet = statement.executeQuery();
+		if (rSet.next()) {
+			school.setCd(rSet.getString("cd"));
+			school.setName(rSet.getString("name"));
 			}
-		}catch (Exception e) {
-			throw e;
-		} finally{
-			//プリペアードステートメントを閉じる
-			if(statement != null) {
-				try {
-					statement.close();
-				}catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
-			//	コネクションを閉じる
-			if (connection != null) {
-				try {
-					connection.close();
-				}catch (SQLException sqle){
-					throw sqle;
-				}
+		else {
+			school=null;
 			}
 		}
-		return school;
+	catch(Exception e) {
+		throw e;
+		}
+	finally{
+		if(statement !=null) {
+			try {
+				statement.close();
+				}
+			catch (SQLException sqle) {
+				throw sqle;
+				}
+			}
+		if(connection !=null) {
+			try {
+				connection.close();
+				}
+			catch (SQLException sqle) {
+				throw sqle;
+				}
+			}
 	}
+return school;
 }
