@@ -20,7 +20,7 @@
 <%-- sessionを有効にする↓これによって他のページに遷移したときでも、ログイン情報は維持される --%>
   <% bean.User user = (bean.User)session.getAttribute("user"); %>
  <%-- <% if (user != null && user.isAuthenticated()){ %> --%>
-  <form action="StudentCreateExecute.action" method="post">
+  <form action="StudentCreateExecute.action" method="get">
   <label>入学年度</label>
   <div>
   <select class="form-select" name="ent_year">
@@ -34,10 +34,11 @@
          <%
          }
          %>
-         <c:if test="${yearError == true}">
-         	<p style="color:yellow;">入学年度を選択してください</p>
-         </c:if>
   </select><br>
+  <c:if test="${yearError}">
+         	<p style="color:orange;">入学年度を選択してください</p>
+         	<br>
+         </c:if>
   </div>
   <label>学生番号</label>
    <input type ="text" class="form-control" name="no" value="${ no}" required oninvalid = "this.setCustomValidity('このフィールドを入力してください')" oninput="this.setCustomValidity('')"/>

@@ -5,7 +5,7 @@
 <Context reloadable="true">
 <!--<Context reloadable="true">-->
 	<Resource
-		name="jdbc/kadai"
+		name="jdbc/test2"
 		auth="Container"
 		type="javax.sql.DataSource"
 		driverClassName="org.h2.Driver"

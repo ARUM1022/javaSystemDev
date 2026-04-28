@@ -42,6 +42,6 @@ public class StudentCreateExecuteAction extends Action {
 		student.setSchool(school);
 		student.setisAttend(isAttend);
 		sDao.save(student);
-		req.getRequestDispatcher("/scoremanager/main/student_create_done.java");
+		req.getRequestDispatcher("/scoremanager/main/student_create_done.jsp").forward(req,res);
 	}
 }

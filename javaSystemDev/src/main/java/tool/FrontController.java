@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
  public class FrontController extends HttpServlet{
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		try {
 			String path = req.getServletPath().substring(1);
 			String name = path.replace(".action","Action").replace("/",".");
@@ -32,8 +32,14 @@ import jakarta.servlet.http.HttpServletResponse;
 			
 		}catch (Exception e) {
 			e.printStackTrace();
+			req.setAttribute("error", e);
 			//errorページへリダイレクト
-			req.getRequestDispatcher("/error.jsp").forward(req,res);
+			req.getRequestDispatcher("/scoremanager/main/error.jsp").forward(req,res);
 		}
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req,HttpServletResponse res) throws ServletException,IOException{
+	    doGet(req, res);
 	}
 }

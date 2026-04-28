@@ -13,6 +13,7 @@ import dao.ClassNumDao;
 import dao.StudentDao;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import tool.Action;
 
 public class StudentListAction extends Action {
@@ -38,7 +39,15 @@ public class StudentListAction extends Action {
 		teacher.setPassword("password");
 		teacher.setName("管理者");
 		teacher.setSchool(school);
-
+		Student student= new Student();
+		student.setNo("0");
+		student.setClassNum("1010");
+		student.setName("テスト学生");
+		student.setisAttend(true);
+		student.setEntYear(2020);
+		student.setSchool(school);
+		HttpSession session = req.getSession();
+		session.setAttribute("user",teacher);
 		
 		//ローカル変数の指定
 		String entYearStr = "";//入力された入学年度
@@ -46,7 +55,8 @@ public class StudentListAction extends Action {
 		String isAttendStr = "";//入力された在学フラグ
 		int entYear = 0;//入学年度
 		boolean isAttend = false;//在学フラグ
-		List<Student> students = null;//学生リスト
+		List<Student> students = new ArrayList<>();//学生リスト
+		students.add(student);
 		LocalDate todaysDate = LocalDate.now();//LocalDateインスタンスを取得
 		int year = todaysDate.getYear();//現在の年を取得
 		StudentDao sDao = new StudentDao();//学生Dao
@@ -95,6 +105,8 @@ public class StudentListAction extends Action {
 			students = sDao.filter(teacher.getSchool(),isAttend);
 		}
 		//JSPへフォワード
+		session.setAttribute("students",students);
+		
 	    req.getRequestDispatcher("student_list.jsp").forward(req, res);
 
 	}	

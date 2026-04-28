@@ -13,8 +13,8 @@ import bean.Student;
 
 public class StudentDao extends Dao{
 	
-	private String baseSql = "select * from student where school_cd=?";
-
+	private String baseSql = "select * from student where school_cd=? ";
+ 
 	
 	private List<Student> postFilter(ResultSet rSet, School school) throws Exception{
 		List<Student> list = new ArrayList<>();
@@ -48,18 +48,18 @@ public class StudentDao extends Dao{
 		//リザルトセット
 		ResultSet rSet = null;
 		//SQL文の条件
-		String condition = "and ent_year=? and class_num=?";
+		String condition = " and ent_year=? and class_num=?";
 		//SQL文のソート
 		String order = " order by no asc";
 		
 		//SQL文の在学フラグ条件
 		String conditionIsAttend = "";
 		if (isAttend) { 
-			conditionIsAttend = "and is_attend=true";
+			conditionIsAttend = " and is_attend=true";
 		}
 		try {
 			//プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement(baseSql + condition + conditionIsAttend + order);
+			statement = connection.prepareStatement(baseSql + " " + condition  + " " + conditionIsAttend + " " + order);
 			//プリペアードステートメントに学校コードをバインド
 			statement.setString(1, school.getCd());
 			//プリペアードステートメントに入学年度をバインド
@@ -140,8 +140,6 @@ public class StudentDao extends Dao{
 				//リザルトセット
 				ResultSet rSet = null;
 				//SQL文の条件
-				String condition = "and ent_year=? and class_num=?";
-				//SQL文のソート
 				String order = " order by no asc";
 				
 				//SQL文の在学フラグ条件
@@ -151,7 +149,7 @@ public class StudentDao extends Dao{
 				}
 				try {
 					//プリペアードステートメントにSQL文をセット
-					statement = connection.prepareStatement(baseSql + condition + conditionIsAttend + order);
+					statement = connection.prepareStatement(baseSql + conditionIsAttend + order);
 					//プリペアードステートメントに学校コードをバインド
 					statement.setString(1, school.getCd());
 					//プライベートステートメントを実行
@@ -187,27 +185,25 @@ public class StudentDao extends Dao{
 				//学生が存在しなかった場合
 				//プリペアードステートメントにINSERT文をセット
 				statement = connection.prepareStatement(
-						"insert into student(no, name, ent_year, class_num, is_attend, school_cd) values(?, ?, ?, ?, ?, ?)");
-				//プリペアードステートメントに値をバインド
-				statement.setString(1,student.getNo());
-				statement.setString(2,student.getName());
-				statement.setInt(3,student.getEntYear());
-				statement.setString(4, student.getClassNum());
-				statement.setBoolean(5,student.isAttend());
-				statement.setString(6,student.getSchool().getCd());
+					    "update student set name=?, ent_year=?, class_num=?, is_attend=? where no=?");
+
+					statement.setString(1, student.getName());
+					statement.setInt(2, student.getEntYear());
+					statement.setString(3, student.getClassNum());
+					statement.setBoolean(4, student.isAttend());
+					statement.setString(5, student.getNo());
 			} else {
 				//学生が存在した場合
 				//プリペアードステートメントにUPDATE文をセット
-				statement = connection
-						.prepareStatement("update student set name=?, ent_year=?,class_num=?, is_attend=? where no=?");
-				//プリペアードステートメントに値をバインド
-				statement.setString(1,student.getNo());
-				statement.setString(2,student.getName());
-				statement.setInt(3, student.getEntYear());
-				statement.setString(4, student.getClassNum());
-				statement.setBoolean(5, student.isAttend());
-				statement.setString(6, student.getSchool().getCd());
-			} 
+				statement = connection.prepareStatement(
+					    "update student set name=?, ent_year=?, class_num=?, is_attend=? where no=?");
+
+					statement.setString(1, student.getName());
+					statement.setInt(2, student.getEntYear());
+					statement.setString(3, student.getClassNum());
+					statement.setBoolean(4, student.isAttend());
+					statement.setString(5, student.getNo());
+			}
 			//プリペアードステートメントを実行
 			count = statement.executeUpdate();
 		} catch(Exception e) { 
@@ -281,8 +277,15 @@ public class StudentDao extends Dao{
 			//プリペアードステートメントを閉じる
 			if( connection != null) {
 				try {
-					statement.close();
+					connection.close();
 				}catch (SQLException sqle){
+					throw sqle;
+				}
+			}
+			if(statement != null) {
+				try {
+					statement.close();
+				}catch (SQLException sqle) {
 					throw sqle;
 				}
 			}

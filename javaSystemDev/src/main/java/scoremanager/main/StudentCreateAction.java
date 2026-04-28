@@ -16,9 +16,8 @@ public class StudentCreateAction extends Action{
 		HttpSession session = req.getSession();
 		Teacher teacher = (Teacher) session.getAttribute("user");
 		ClassNumDao cDao = new ClassNumDao();
-		List<String> classList = cDao.filter(teacher.School.getClass());
-		req.setAttribute("classList", classList);
-		
+		List<String> no = cDao.filter(teacher.getSchool());
+		req.setAttribute("no", no);
 		req.getRequestDispatcher("/scoremanager/main/student_create.jsp").forward(req,res);
 
 		

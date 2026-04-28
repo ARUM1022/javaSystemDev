@@ -9,7 +9,7 @@ import bean.School;
 
 public class SchoolDao extends Dao{
 	/**
-	 * getメソッド　学校コードを指定して学校氏ンスタンスを一見取得する
+	 * getメソッド　学校コードを指定して学校インスタンスを一見取得する
 	 * 
 	 * @pram cd:String cd:String
 	 * 						学校コード;
@@ -26,7 +26,7 @@ public class SchoolDao extends Dao{
 		
 		try {
 			//プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement("subject * from school where cd = ?");
+			statement = connection.prepareStatement("select * from school where cd = ?");
 			//プリペアードステートメントに学校コードをバインド
 			statement.setString(1, cd);
 			//プリペアードステートメントヲ実行
@@ -45,6 +45,7 @@ public class SchoolDao extends Dao{
 		}catch (Exception e) {
 			throw e;
 		} finally{
+			
 			//プリペアードステートメントを閉じる
 			if(statement != null) {
 				try {

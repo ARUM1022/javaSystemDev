@@ -54,7 +54,7 @@
   
   
   <c:choose>
-   <c:when test="${student.size()>0 }">
+   <c:when test="${students.size()>0 && students != null }">
     <div>検索結果:${students.size() }件</div>
     <table class="table table-hover">
      <tr>
@@ -68,10 +68,10 @@
      </tr>
      <c:forEach var="student" items="${students }">
       <tr>
-       <td>${students.entYear }</td>
-       <td>${students.no }</td>
-       <td>${students.name }</td>
-       <td>${students.classNum }</td>
+       <td>${student.entYear }</td>
+       <td>${student.no }</td>
+       <td>${student.name }</td>
+       <td>${student.classNum }</td>
        <td class="text-center">
        <%-- --%>
         <c:choose>
@@ -83,13 +83,14 @@
         </c:otherwise>
         </c:choose>
        </td>
-       <td><a hred="StudentUpdate.action?no=${student.no }">変更</a></td>
+       <td><a href="StudentUpdate.action?no=${student.no }">変更</a></td>
      </tr>
     </c:forEach>
     </table>
    </c:when>   
    <c:otherwise>
     <div>学生情報が存在しませんでした。</div>
+    <p>${students}</p>
    </c:otherwise>
    </c:choose>
  </section>
