@@ -13,6 +13,7 @@ import org.eclipse.tags.shaded.org.apache.xpath.operations.String;
 import bean.School;
 import bean.Student;
 import bean.Subject;
+import bean.Test;
 
 public class TestDao extends Dao{
 	
