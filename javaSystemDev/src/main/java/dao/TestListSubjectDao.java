@@ -14,11 +14,11 @@ import bean.Student;
 
 public class TestListStudentDao extends Dao{
 	
-	private String baseSql = "select * from test where student_no=?";
+	private String baseSql = "select * from test where subject_cd=?";
 
 	
-	private List<TestListStudent> postFilter(ResultSet rSet, Test test) throws Exception{
-		List<TestListStudent> list = new ArrayList<>();
+	private List<TestListSubject> postFilter(ResultSet rSet, Test test) throws Exception{
+		List<TestListSubject> list = new ArrayList<>();
 		try {
 			while (rSet.next()) {
 				//学生インスタンスを初期化
