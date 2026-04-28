@@ -12,6 +12,7 @@ import org.eclipse.tags.shaded.org.apache.xpath.operations.String;
 
 import bean.School;
 import bean.Student;
+import bean.Subject;
 
 public class SubjectDao extends Dao{
 
