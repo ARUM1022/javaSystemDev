@@ -9,13 +9,14 @@ import bean.School;
 import bean.Teacher;
 import bean.Subject;
 import dao.SubjectDao;
+import dao.TeacherDao;
+import dao.SubjectDao;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import tool.Action;
 
-public class SubjecListAction package scoremanager.main;
-extends Action {
+public class SubjecCreateExecuteAction package scoremanager.main extends Action {
 	
 	@Override
 	public void execute(HttpServletRequest req,HttpServletResponse res) throws Exception{
