@@ -32,7 +32,7 @@ public class TestDao extends Dao{
 				test.setPoint(rSet.getInt("point"));
 				test.setClassNum(rSet.getString("class_num"));
 				//リストに追加
-				list.add(student);
+				list.add(test);
 			}
 		}catch (SQLException | NullPointerException e) {
 			e.printStackTrace();
@@ -41,7 +41,7 @@ public class TestDao extends Dao{
 	}
 
 //filterメソッド	
-	public List<Test> filter(Int entYear, String classNum, String Subject, Int no, School school ) throws Exception{
+	public List<Test> filter(int entYear, String classNum, Subject subject, int no, School school) throws Exception{
 		//リストを初期化
 				List<Test> list = new ArrayList<>();
 				//コネクションを確率
@@ -56,8 +56,10 @@ public class TestDao extends Dao{
 					//プリペアードステートメントにSQL文をセット
 					statement = connection.prepareStatement(baseSql + condition);
 					//プリペアードステートメントに学校コードをバインド
-					statement.setString(1, classNum);
-					statement.setString(2,no);
+					statement.setString(1, school.getCd());
+					statement.setString(2, subject.getCd());
+					statement.setString(3, classNum);
+					statement.setString(4,no);
 					//プライベートステートメントを実行
 					rSet = statement.executeQuery();
 					//リストへの格納処理を実行
@@ -111,35 +113,36 @@ public class TestDao extends Dao{
 				statement.setInt(4, test.getNo());
 				statement.setInt(5,test.getPoint());
 				statement.setString(6,test.getClassNum());
+			}
 			//プリペアードステートメントを実行
 			count = statement.executeUpdate();
-		} catch(Exception e) { 
-			throw e;
-		} finally {
+			} catch(Exception e) { 
+				throw e;
+			}	 finally {
 			//プリペアードステートメントを閉じる
-			if(statement != null) {
-				try { 
-					statement.close();
-				} catch (SQLException sqle) {
-					throw sqle;
+				if(statement != null) {
+					try { 
+						statement.close();
+					} catch (SQLException sqle) {
+						throw sqle;
+					}
 				}
-			}
 			//コネクションを閉じる
-			if(connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException sqle) {
-					throw sqle;
+				if(connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException sqle) {
+						throw sqle;
+					}
 				}
 			}
-		}
-		if(count > 0) {
-			//実行件数が1件以上ある場合
-			return true;
-		}else { 
+			if(count > 0) {
+				//実行件数が1件以上ある場合
+				return true;
+			}else { 
 			//実行件数が０件の場合
-			return false;
-		}
+				return false;
+			}
 	}
 //getメソッド	
 	public Test get(Student student,int no) throws Exception{
