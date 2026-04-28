@@ -16,16 +16,16 @@ import bean.Subject;
 
 public class SubjectDao extends Dao{
 
-	private List<Subject> postFilter(String cd, School school) throws Exception{
+	private List<Subject> postFilter(ResultSet rSet, School school) throws Exception{
 		List<Subject> list = new ArrayList<>();
 		try {
 			while (rSet.next()) {
 				SubjectDao subjectDao = new SubjectDao();
 				//科目インスタンスに検索結果をセット
-				subject.setCode(rSet.getString("cd"));
-				subject.setName(rSet.getString("name"));
+				Subject.setCd(rSet.getString("cd"));
+				Subject.setName(rSet.getString("name"));
 					//学校フィールドには学校コードで検索した学校インスタンスをセット
-				student.setSchool(schoolDao.get(rSet.getString("school_cd")));
+				Student.setSchool(SchoolDao.get(rSet.getString("school_cd")));
 				//リストに追加
 				list.add(student);
 			}
@@ -46,7 +46,7 @@ public class SubjectDao extends Dao{
 				//リザルトセット
 				ResultSet rSet = null;
 
-				}
+				
 				try {
 					//プリペアードステートメントにSQL文をセット
 					statement = connection.prepareStatement(
@@ -72,16 +72,16 @@ public class SubjectDao extends Dao{
 				return list;
 	}
 //Saveメソッド
-	public boolean save(Subject subject) throws Exception{
+	public boolean save(Subject subject)throws Exception{
 		//コネクションを確立
 		Connection connection = getConnection();
 		//プリペアードステートメント
 		PreparedStatement statement = null;
 		//実行件数
 		int count = 0;
-		try { 
-			//データベースから学生を取得
-			Subject old = get(subject.getCd());
+		try {
+			//データベースから科目を取得
+			Subject old = get(Subject.getCd());
 			if (old == null) {
 				//科目が存在しなかった場合
 				//プリペアードステートメントにINSERT文をセット
@@ -90,7 +90,7 @@ public class SubjectDao extends Dao{
 				//プリペアードステートメントに値をバインド
 				statement.setString(1,subject.getCd());
 				statement.setString(2,subject.getName());
-				statement.setSchool(3,schoolDao.get(rSet.getString("school_cd")));
+				statement.setSchool(3,subject.getSchool().getCd());
 			} else {
 				//科目が存在した場合
 				//プリペアードステートメントにUPDATE文をセット
@@ -99,7 +99,7 @@ public class SubjectDao extends Dao{
 				//プリペアードステートメントに値をバインド
 				statement.setString(1,subject.getCd());
 				statement.setString(2,subject.getName());
-				statement.setSchool(3,schoolDao.get(rSet.getString("school_cd")));
+				statement.setSchool(3,subject.getSchool().getCd());
 			} 
 			//プリペアードステートメントを実行
 			count = statement.executeUpdate();
@@ -135,7 +135,7 @@ public class SubjectDao extends Dao{
 	public Subject get(String cd,School school) throws Exception{
 
 		//科目インスタンスを初期化
-		Subject Subject = new Subject();
+		Subject subject = new Subject();
 		//データベースへのコネクションを確立
 		Connection connection = getConnection();
 		//プリペアードステートメント
@@ -158,10 +158,10 @@ public class SubjectDao extends Dao{
 			if(rSet.next()) {
 				//リザルトセットが存在する場合
 				//科目インスタンスに検索結果をセット
-				subject.setCode(rSet.getString("cd"));
+				subject.setCd(rSet.getString("cd"));
 				subject.setName(rSet.getString("name"));
 					//学校フィールドには学校コードで検索した学校インスタンスをセット
-				student.setSchool(schoolDao.get(rSet.getString("school_cd")));
+				subject.setSchool(SchoolDao.get(rSet.getString("school_cd")));
 			} else {
 				//リザルトセットが存在しない場合
 				//科目インスタンスにnullをセット
