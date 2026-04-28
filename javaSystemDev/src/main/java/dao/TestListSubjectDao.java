@@ -10,9 +10,11 @@ import java.util.List;
 
 import org.eclipse.tags.shaded.org.apache.xpath.operations.String;
 
-import bean.Student;
+import bean.Subject;
+import bean.Test;
+import bean.TestListSubject;
 
-public class TestListStudentDao extends Dao{
+public class TestListSubjectDao extends Dao{
 	
 	private String baseSql = "select * from test where subject_cd=?";
 
@@ -22,9 +24,9 @@ public class TestListStudentDao extends Dao{
 		try {
 			while (rSet.next()) {
 				//学生インスタンスを初期化
-				TestListStudent tes=new TestListStudent();
+				TestListSubject tes=new TestListSubject();
 				//学生インスタンスに検索結果をセット
-				tes.setStudentNo(rSet.getString("student_no"));
+				tes.setSubjectCd(rSet.getString("subject_cd"));
 				tes.setPoint(rSet.getInt("point"));
 				//リストに追加
 				list.add(tes);
@@ -36,9 +38,9 @@ public class TestListStudentDao extends Dao{
 	}
 
 //filterメソッド	
-	public List<TestListStudent> filter(Student student) throws Exception{
+	public List<TestListSubject> filter(Subject subject) throws Exception{
 		//リストを初期化
-				List<TestListStudent> list = new ArrayList<>();
+				List<TestListSubject> list = new ArrayList<>();
 				//コネクションを確率
 				Connection connection = getConnection();
 				//プリペアードステートメント
@@ -49,7 +51,7 @@ public class TestListStudentDao extends Dao{
 					//プリペアードステートメントにSQL文をセット
 					statement = connection.prepareStatement(baseSql);
 					//プリペアードステートメントに学生番号をバインド
-					statement.setString(1, student.getNo());
+					statement.setString(1, subject.getCd());
 					//プライベートステートメントを実行
 					rSet = statement.executeQuery();
 					//リストへの格納処理を実行
