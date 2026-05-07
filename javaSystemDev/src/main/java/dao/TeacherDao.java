@@ -3,12 +3,9 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-//ここにまだimportが追加される可能性あり
 
-import bean.School;
+import org.eclipse.tags.shaded.org.apache.xpath.operations.String;
+
 import bean.Teacher;
 
 public class TeacherDao extends Dao{
@@ -40,8 +37,7 @@ public class TeacherDao extends Dao{
 //Loginメソッド
 	public boolean Login(String id, String password) throws Exception{
 		//validでidpassの組み合わせあるか返す
-		boolean valid = new boolean();
-		valid = false;
+		boolean valid = false;
 		//データベースへのコネクションを確立
 		Connection connection = getConnection();
 		//プリペアードステートメント初期化
@@ -68,4 +64,5 @@ public class TeacherDao extends Dao{
 			throw e;
 		}
 		return valid;
-	}	
+	}
+}
