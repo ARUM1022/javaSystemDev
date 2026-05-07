@@ -5,7 +5,8 @@ import org.eclipse.tags.shaded.org.apache.xpath.operations.String;
 public class EncodingFilter{
 //init
 	public void init(Filterconfig filterconfig) throws Exception{
-		final String encoding = "UTF-8";
+		String encoding = new String();
+		 encoding = "UTF-8"
 	}
 //dofilter
 	public void dofilter(ServletRequest request,ServletResponse response,FilterChain chain)throws Exception{
