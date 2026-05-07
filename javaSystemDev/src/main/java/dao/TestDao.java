@@ -90,31 +90,31 @@ public class TestDao extends Dao{
 		int count = 0;
 		try { 
 			//データベースから学取得
-			Test old = get(test.getSubject());
+			Test old = get(Test.getSubject());
 			if (old == null) {
 				//結果が存在しなかった場合
 				//プリペアードステートメントにINSERT文をセット
 				statement = connection.prepareStatement(
 						"insert into test(student_no,subject_cd,school_cd,no,point,class_num) values(?, ?, ?, ?, ?, ?)");
 				//プリペアードステートメントに値をバインド
-				statement.setString(1,test.getStudentNo());
-				statement.setString(2,test.getSubjectCd());
-				statement.setString(3,test.getSchoolCd());
-				statement.setInt(4, test.getNo());
-				statement.setInt(5,test.getPoint());
-				statement.setString(6,test.getClassNum());
+				statement.setString(1,Test.getStudentNo());
+				statement.setString(2,Test.getSubjectCd());
+				statement.setString(3,Test.getSchoolCd());
+				statement.setInt(4, Test.getNo());
+				statement.setInt(5,Test.getPoint());
+				statement.setString(6,Test.getClassNum());
 			} else {
 				//結果が存在した場合
 				//プリペアードステートメントにUPDATE文をセット
 				statement = connection
 						.prepareStatement("update stest set student_no=?,subject_cd=?,School_cd=?,no=?,point=?,class_num=?");
 				//プリペアードステートメントに値をバインド
-				statement.setString(1,test.getStudentNo());
-				statement.setString(2,test.getSubjectCd());
-				statement.setString(3,test.getSchoolCd());
-				statement.setInt(4, test.getNo());
-				statement.setInt(5,test.getPoint());
-				statement.setString(6,test.getClassNum());
+				statement.setString(1,Test.getStudentNo());
+				statement.setString(2,Test.getSubjectCd());
+				statement.setString(3,Test.getSchoolCd());
+				statement.setInt(4, Test.getNo());
+				statement.setInt(5,Test.getPoint());
+				statement.setString(6,Test.getClassNum());
 			}
 			//プリペアードステートメントを実行
 			count = statement.executeUpdate();
