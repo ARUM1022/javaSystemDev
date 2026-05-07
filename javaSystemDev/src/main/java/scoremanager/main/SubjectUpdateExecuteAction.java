@@ -16,14 +16,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import tool.Action;
 
-public class SubjectCreateExecuteAction  extends Action {
+public class SubjectUpdateExecuteAction  extends Action {
 	
 	@Override
 	public void execute(HttpServletRequest req,HttpServletResponse res) throws Exception{
 		HttpSession session = req.getSession();//セッション
 		Subject subject  = (Subject) req.getAttribute("subject");
 		SubjectDao.save(subject);
-	    req.getRequestDispatcher("subject_create_done.jsp").forward(req, res);
-
+	    req.getRequestDispatcher("subject_update_done.jsp").forward(req, res);
 	}	
 }

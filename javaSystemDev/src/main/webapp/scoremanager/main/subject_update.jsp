@@ -20,7 +20,7 @@
 <%-- sessionを有効にする↓これによって他のページに遷移したときでも、ログイン情報は維持される --%>
   <% bean.User user = (bean.User)session.getAttribute("user"); %>
  <%-- <% if (user != null && user.isAuthenticated()){ %> --%>
-  <form action="SubjectCreateExecute.action" method="post">
+  <form action="SubjectUpdateExecute.action" method="post">
   <label>科目コード {$subject.cd }</label>
 
   <label>科目名</label>

@@ -36,9 +36,9 @@ public class SubjectDao extends Dao{
 	}
 	
 
-	public List<Student> filter(School school,boolean isAttend) throws Exception{
+	public List<Subject> filter(School school) throws Exception{
 		//リストを初期化
-				List<Student> list = new ArrayList<>();
+				List<Subject> list = new ArrayList<>();
 				//コネクションを確率
 				Connection connection = getConnection();
 				//プリペアードステートメント
@@ -99,7 +99,7 @@ public class SubjectDao extends Dao{
 				//プリペアードステートメントに値をバインド
 				statement.setString(1,subject.getCd());
 				statement.setString(2,subject.getName());
-				statement.setSchool(3,subject.getSchool().getCd());
+				statement.setString(3,subject.getSchool().getCd());
 			} 
 			//プリペアードステートメントを実行
 			count = statement.executeUpdate();

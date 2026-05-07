@@ -9,7 +9,7 @@
  <c:param name="scripts"></c:param>
  <c:param name="content">
  <section class="me-4">
-  <h2 class="h3 mb-3 fw-normal bg-secondary bg-opacity-10 py-2 px-4">科目削除</h2>
+  <h2 class="h3 mb-3 fw-normal bg-secondary bg-opacity-10 py-2 px-4">エラー</h2>
 <%-- ここまでがテンプレ --%>
 <%-- ここからが天ぷら --%>
 
@@ -20,10 +20,8 @@
 <%-- sessionを有効にする↓これによって他のページに遷移したときでも、ログイン情報は維持される --%>
   <% bean.User user = (bean.User)session.getAttribute("user"); %>
  <%-- <% if (user != null && user.isAuthenticated()){ %> --%>
- <form action="SubjectDeleteExecute.action" method="post">
-　<label>科目コード{$subject.cd } {$subject.name }を削除してもよろしいですか？</label>
-　<button class="btn input=" id="filter-button">削除</button>
- </form>
+  <label>エラーが発生しました</label>
+
 </section>
 </c:param>
 </c:import>

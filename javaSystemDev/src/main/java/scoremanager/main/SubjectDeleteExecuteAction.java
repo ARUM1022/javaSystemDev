@@ -16,14 +16,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import tool.Action;
 
-public class SubjectCreateExecuteAction  extends Action {
+public class SubjectDeleteExecuteAction  extends Action {
 	
 	@Override
 	public void execute(HttpServletRequest req,HttpServletResponse res) throws Exception{
 		HttpSession session = req.getSession();//セッション
 		Subject subject  = (Subject) req.getAttribute("subject");
-		SubjectDao.save(subject);
-	    req.getRequestDispatcher("subject_create_done.jsp").forward(req, res);
-
+		if(SubjectDao.delete(subject) == true){
+		    req.getRequestDispatcher("subject_delete_done.jsp").forward(req, res);
+		}else {
+		    req.getRequestDispatcher("subject_delete_done.jsp").forward(req, res);
+		}
 	}	
 }
