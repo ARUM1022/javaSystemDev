@@ -6,15 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-//ここにまだimportが追加される可能性あり
 
 import bean.Student;
 import bean.TestListStudent;
 
 public class TestListStudentDao extends Dao{
 	
-	private String baseSql = "select * from test where student_no=?";
-
 	
 	private List<TestListStudent> postFilter(ResultSet rSet) throws Exception{
 		List<TestListStudent> list = new ArrayList<>();
@@ -46,7 +43,7 @@ public class TestListStudentDao extends Dao{
 				ResultSet rSet = null;
 				try {
 					//プリペアードステートメントにSQL文をセット
-					statement = connection.prepareStatement(baseSql);
+					statement = connection.prepareStatement("select * from test where student_no=?");
 					//プリペアードステートメントに学生番号をバインド
 					statement.setString(1, student.getNo());
 					//プライベートステートメントを実行

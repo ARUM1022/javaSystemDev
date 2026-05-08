@@ -27,13 +27,16 @@ public class TestDao extends Dao{
 				Student student = new Student();
 				Subject subject = new Subject();
 				School school = new School();
-				//学生インスタンスに検索結果をセット
+
 				student.setNo(rSet.getString("student_no"));
 				subject.setCd(rSet.getString("subject_cd"));
 				school.setCd(rSet.getString("school_cd"));
 				test.setStudent(student);
 				test.setSubject(subject);
 				test.setSchool(school);
+				test.setString(rSet.getStudent().getNo());
+				test.setSubject(rSet.getString("subject_cd"));
+				test.setSchoolCd(rSet.getString("school_cd"));
 				test.setNo(rSet.getInt("no"));
 				test.setPoint(rSet.getInt("point"));
 				test.setClassNum(rSet.getString("class_num"));
@@ -98,6 +101,9 @@ public class TestDao extends Dao{
 				for (Test test : list) {
 				//データベースから学取得
 			Test old = get(test.getStudent(),test.getNo());
+		try { 
+			//データベースから学取得
+			Test old = get(Test.getSubject());
 			if (old == null) {
 				//結果が存在しなかった場合
 				//プリペアードステートメントにINSERT文をセット
@@ -113,6 +119,12 @@ public class TestDao extends Dao{
 				statement.setInt(4, test.getNo());
 				statement.setInt(5,test.getPoint());
 				statement.setString(6,test.getClassNum());
+				statement.setString(1,Test.getStudentNo());
+				statement.setString(2,Test.getSubjectCd());
+				statement.setString(3,Test.getSchoolCd());
+				statement.setInt(4, Test.getNo());
+				statement.setInt(5,Test.getPoint());
+				statement.setString(6,Test.getClassNum());
 			} else {
 				//結果が存在した場合
 				//プリペアードステートメントにUPDATE文をセット
@@ -131,7 +143,14 @@ public class TestDao extends Dao{
 				}
 				count = statement.executeUpdate();
 				}
-			//プリペアードステートメントを実行
+				statement.setString(1,Test.getStudentNo());
+				statement.setString(2,Test.getSubjectCd());
+				statement.setString(3,Test.getSchoolCd());
+				statement.setInt(4, Test.getNo());
+				statement.setInt(5,Test.getPoint());
+				statement.setString(6,Test.getClassNum());
+			}
+
 			} catch(Exception e) { 
 				throw e;
 			}	 finally {

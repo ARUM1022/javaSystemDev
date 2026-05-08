@@ -22,7 +22,7 @@
       <th>変更</th>
       <th>削除</th>
      </tr>
-     <c:forEach var="student" items="${students }">
+     <c:forEach var="subject" items="${subjects }">
       <tr>
        <td>${subject.cd }</td>
        <td>${sunject.name }</td>

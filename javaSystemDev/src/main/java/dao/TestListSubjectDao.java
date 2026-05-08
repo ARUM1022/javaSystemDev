@@ -13,7 +13,7 @@ import bean.TestListSubject;
 
 public class TestListSubjectDao extends Dao{
 	
-	private String baseSql = "select * from test where subject_cd=?";
+
 
 	
 	private List<TestListSubject> postFilter(ResultSet rSet) throws Exception{
@@ -46,7 +46,7 @@ public class TestListSubjectDao extends Dao{
 				ResultSet rSet = null;
 				try {
 					//プリペアードステートメントにSQL文をセット
-					statement = connection.prepareStatement(baseSql);
+					statement = connection.prepareStatement("select * from test where subject_cd=?");
 					//プリペアードステートメントに学生番号をバインド
 					statement.setString(1, student.getNo());
 					//プライベートステートメントを実行

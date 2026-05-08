@@ -70,6 +70,66 @@ public class SubjectDao extends Dao{
 				return list;
 	}
 
+//Saveメソッド
+	public boolean save(Subject subject)throws Exception{
+		//コネクションを確立
+		Connection connection = getConnection();
+		//プリペアードステートメント
+		PreparedStatement statement = null;
+		//実行件数
+		int count = 0;
+		try {
+			//データベースから科目を取得
+			Subject old = get(Subject.getCd());
+			if (old == null) {
+				//科目が存在しなかった場合
+				//プリペアードステートメントにINSERT文をセット
+				statement = connection.prepareStatement(
+						"insert into subject(no,name,school) values(?, ?, ?)");
+				//プリペアードステートメントに値をバインド
+				statement.setString(1,subject.getCd());
+				statement.setString(2,subject.getName());
+				statement.setString(3,subject.getSchool().getCd());
+			} else {
+				//科目が存在した場合
+				//プリペアードステートメントにUPDATE文をセット
+				statement = connection
+						.prepareStatement("update student set no=?, name=?, school=?");
+				//プリペアードステートメントに値をバインド
+				statement.setString(1,subject.getCd());
+				statement.setString(2,subject.getName());
+				statement.setString(3,subject.getSchool().getCd());
+			} 
+			//プリペアードステートメントを実行
+			count = statement.executeUpdate();
+		} catch(Exception e) { 
+			throw e;
+		} finally {
+			//プリペアードステートメントを閉じる
+			if(statement != null) {
+				try { 
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			//コネクションを閉じる
+			if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		if(count > 0) {
+			//実行件数が1件以上ある場合
+			return true;
+		}else { 
+			//実行件数が０件の場合
+			return false;
+		}
+	}
 //Getメソッド	
 	public Subject get(String cd,School school) throws Exception{
 
@@ -122,67 +182,7 @@ public class SubjectDao extends Dao{
 		}
 		return subject;
 	}
-	//Saveメソッド
-		public boolean save(Subject subject)throws Exception{
-			//コネクションを確立
-			Connection connection = getConnection();
-			//プリペアードステートメント
-			PreparedStatement statement = null;
-			//実行件数
-			int count = 0;
-			
-			try {
-				//データベースから科目を取得
-//				Subject old = get(subject.getCd(),school());
-//				if (old == null) {
-//					//科目が存在しなかった場合
-//					//プリペアードステートメントにINSERT文をセット
-//					statement = connection.prepareStatement(
-//							"insert into subject(no,name,school) values(?, ?, ?)");
-//					//プリペアードステートメントに値をバインド
-//					statement.setString(1,subject.getCd());
-//					statement.setString(2,subject.getName());
-//					statement.setString(3,subject.getSchool().getCd());
-//				} else {
-//					//科目が存在した場合
-//					//プリペアードステートメントにUPDATE文をセット
-//					statement = connection
-//							.prepareStatement("update student set no=?, name=?, school=? where cd=? ");
-//					//プリペアードステートメントに値をバインド
-//					statement.setString(1,subject.getCd());
-//					statement.setString(2,subject.getName());
-//					statement.setString(3,subject.getSchool().getCd());
-//				} 
-//				//プリペアードステートメントを実行
-				count = statement.executeUpdate();
-			} catch(Exception e) { 
-				throw e;
-			} finally {
-				//プリペアードステートメントを閉じる
-				if(statement != null) {
-					try { 
-						statement.close();
-					} catch (SQLException sqle) {
-						throw sqle;
-					}
-				}
-				//コネクションを閉じる
-				if(connection != null) {
-					try {
-						connection.close();
-					} catch (SQLException sqle) {
-						throw sqle;
-					}
-				}
-			}
-			if(count > 0) {
-				//実行件数が1件以上ある場合
-				return true;
-			}else { 
-				//実行件数が０件の場合
-				return false;
-			}
-		}
+	
 //Deleteメソッド
 	public boolean delete(Subject subject) throws Exception{
 		//コネクションを確立

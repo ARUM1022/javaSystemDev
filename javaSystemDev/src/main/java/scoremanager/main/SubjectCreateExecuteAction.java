@@ -41,6 +41,9 @@ public class SubjectCreateExecuteAction  extends Action {
 		Map<String, String> errors = new HashMap<>();//エラーメッセージ	
 			// 所属校の全科目情報を取得
 			subjects = SubjectDao.filter(teacher.getSchool());
+		Subject subject  = (Subject) req.getAttribute("subject");
+		SubjectDao.save(subject);
+	    req.getRequestDispatcher("subject_create_done.jsp").forward(req, res);
 
 	}	
 }
