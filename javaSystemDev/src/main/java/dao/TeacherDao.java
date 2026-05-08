@@ -24,7 +24,7 @@ public class TeacherDao extends Dao{
 			//プリペアードステートメントに学生番号をバインド
 			statement.setString(1,id);
 			//プリペアードステートメントを実行
-			resultset rs = statement.executeQuery();
+			Resultset rs = statement.executeQuery();
 			teacher.setName(rs.getString("name"));
 			//後始末
 			statement.close();
@@ -53,9 +53,9 @@ public class TeacherDao extends Dao{
 			ResultSet rs = statement.executeQuery();
 			//リザルトセットが存在するならログイン成功
 			if (rs.next()){
-					valid = teacher;
+					;
 				} else {
-					valid = null;
+					teacher = null;
 				}
 			//後始末
 			statement.close();
@@ -63,6 +63,6 @@ public class TeacherDao extends Dao{
 		} catch (Exception e) {
 			throw e;
 		}
-		return valid;
+		return teacher;
 	}
 }
