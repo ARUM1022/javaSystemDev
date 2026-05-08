@@ -35,9 +35,9 @@ public class TeacherDao extends Dao{
 		return teacher;
 	}
 //Loginメソッド
-	public boolean Login(String id, String password) throws Exception{
+	public Teacher Login(String id, String password) throws Exception{
 		//validでidpassの組み合わせあるか返す
-		boolean valid = false;
+		Teacher teacher = new Teacher();
 		//データベースへのコネクションを確立
 		Connection connection = getConnection();
 		//プリペアードステートメント初期化
@@ -53,9 +53,9 @@ public class TeacherDao extends Dao{
 			ResultSet rs = statement.executeQuery();
 			//リザルトセットが存在するならログイン成功
 			if (rs.next()){
-					valid = true;
+					valid = teacher;
 				} else {
-					valid = false;
+					valid = null;
 				}
 			//後始末
 			statement.close();
