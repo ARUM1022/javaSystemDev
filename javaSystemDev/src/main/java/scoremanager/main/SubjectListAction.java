@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import bean.School;
+import bean.Subject;
 import bean.Teacher;
 import dao.SubjectDao;
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,10 +35,11 @@ public class SubjectListAction extends Action {
 		teacher.setName("管理者");
 		teacher.setSchool(school);
 		Subject subjects = new Subject();
+		
 
 		Map<String, String> errors = new HashMap<>();//エラーメッセージ	
 			// 所属校の全科目情報を取得
-			subjects = SubjectDao.filter(teacher.getSchool());
+			subjects = SubjectDao.filter(teacher.getSchool(), false);
 
 	}	
 }
