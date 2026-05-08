@@ -24,10 +24,8 @@ public class TestDao extends Dao{
 		List<Test> list = new ArrayList<>();
 		try {
 			while (rSet.next()) {
-				//学生インスタンスを初期化
-				Test test=new Test();
 				//学生インスタンスに検索結果をセット
-				test.setStudentNo(rSet.getString("student_no"));
+				test.setString(rSet.getStudent().getNo());
 				test.setSubjectCd(rSet.getString("subject_cd"));
 				test.setSchoolCd(rSet.getString("school_cd"));
 				test.setNo(rSet.getInt("no"));
