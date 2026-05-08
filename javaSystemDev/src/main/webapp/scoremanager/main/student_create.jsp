@@ -18,8 +18,8 @@
 %>
 <%-- ↑年月日をfmtに格納 --%>
 <%-- sessionを有効にする↓これによって他のページに遷移したときでも、ログイン情報は維持される --%>
-  <% bean.User user = (bean.User)session.getAttribute("user"); %>
- <%-- <% if (user != null && user.isAuthenticated()){ %> --%>
+  <% bean.Teacher user = (bean.Teacher)session.getAttribute("user"); %>
+ <% if (user != null && user.isAuthenticated()){ %> 
   <form action="StudentCreateExecute.action" method="get">
   <label>入学年度</label>
   <div>
@@ -41,7 +41,7 @@
          </c:if>
   </div>
   <label>学生番号</label>
-   <input type ="text" class="form-control" name="no" value="${ no}" required oninvalid = "this.setCustomValidity('このフィールドを入力してください')" oninput="this.setCustomValidity('')"/>
+   <input type ="text" class="form-control" name="no" required oninvalid = "this.setCustomValidity('このフィールドを入力してください')" oninput="this.setCustomValidity('')"/>
   <br>
   <label>氏名</label>
    <input type="text" class="form-control" name="name" value="${ name}" required oninvalid ="this.setCustomValidity('このフィールドを入力してください')" oninput="this.setCustomValidity('')"/>
@@ -54,11 +54,11 @@
     <option value="${s}">${s}</option>
    </c:forEach>
   </select><br>
-    <button  class="btn btn-secondary" action ="submit">登録して終了</button>
-  <%--<% } else{--%>
+    <button type ="submit" class="btn btn-secondary">登録して終了</button>
+     </form>
+   <% } else{ %>
   <a href="Login.action">この機能を使うにはログインしてください</a>
-  <%--<% } --%>
-  </form>
+  <% } %>
 </section>
 </c:param>
 </c:import>

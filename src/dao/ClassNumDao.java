@@ -1,19 +1,15 @@
 package dao;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-
-import bean.ClassNum;
+import bean.Classnum;
 import bean.School;
 
 public class ClassNumDao extends Dao{
-	public ClassNum get(String class_num, School school)throws Exception{
+	public ClassNum get(String class_num,School school)throws Exception;{
 		ClassNum classNum=new ClassNum();
 		Connection connection=getConnection();
-		PreparedStatement statement=null;
+		PreparedStatenment statement=null;
 		try {
 			statement=connection.prepareStatement("select * from class_num where class_num=? and school_cd=?");
 			statement.setString(1,class_num);
@@ -52,13 +48,13 @@ public class ClassNumDao extends Dao{
 		return classNum;
 	}
 	public List<String>filter(School school)throws Exception{
-		List<String>list=new ArrayList<>();
-		Connection connection=getConnection();
-		PreparedStatement statement=null;
+		List<String>list=new Arraylist<>();
+		Connecion connection=gerConnection();
+		PreparedStartement statement=null;
 		try {
 			statement=connection.prepareStatement("select class_num from class_num where school_cd=? order by class_num");
 			statement.setString(1,school.getCd());
-			ResultSet rSet=statement.executeQuery();
+			Reseulset rSet=statement.executrQuery();
 			while (rSet.next()) {
 				list.add(rSet.getString("class_num"));
 				}
@@ -86,10 +82,10 @@ public class ClassNumDao extends Dao{
 			}
 		return list;
 	}
-	
-//	public boolean save(ClassNum classNum)throws Exception{
-//		
-//	}
-//	public boolean save(ClassNum classNum,string newClassNum)throws Exception{
-//	}
+	}
+	public boolean save(ClassNum classNum)throws Exception{
+		
+	}
+	public boolean save(ClassNum classNum,string newClassNum)throws Exception{
+	}
 }
