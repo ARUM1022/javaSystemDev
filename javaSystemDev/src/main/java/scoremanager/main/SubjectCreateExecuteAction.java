@@ -36,13 +36,13 @@ public class SubjectCreateExecuteAction  extends Action {
 		teacher.setSchool(school);
 		
 		Subject subjects = new Subject();
-		
+		SubjectDao sDao = new SubjectDao();
 		
 		Map<String, String> errors = new HashMap<>();//エラーメッセージ	
 			// 所属校の全科目情報を取得
-			subjects = SubjectDao.filter(teacher.getSchool());
+			subjects = sDao.filter(teacher.getSchool(), false);
 		Subject subject  = (Subject) req.getAttribute("subject");
-		SubjectDao.save(subject);
+		sDao.save(subject);
 	    req.getRequestDispatcher("subject_create_done.jsp").forward(req, res);
 
 	}	

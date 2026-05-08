@@ -1,7 +1,5 @@
 package scoremanager.main;
 
-import org.eclipse.tags.shaded.org.apache.xpath.operations.String;
-
 import bean.Subject;
 import bean.Teacher;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,7 +14,7 @@ public class SubjectUpdateAction extends Action{
 		HttpSession session = req.getSession();
 		Teacher teacher = (Teacher) session.getAttribute("user");
 		Subject subject = new Subject();
-		String cd = req.getAttribute("cd");
+		String cd = req.getAttribute("cd").toString();
 		String name = req.getParameter("name").toString();
 		subject.setName(name);
 		subject.setCd(cd);

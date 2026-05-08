@@ -1,16 +1,6 @@
-package scoremanager.main
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import bean.School;
-import bean.Student;
-import bean.Teacher;
+package scoremanager.main;
 import bean.Subject;
 import dao.SubjectDao;
-import dao.TeacherDao;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -22,7 +12,8 @@ public class SubjectUpdateExecuteAction  extends Action {
 	public void execute(HttpServletRequest req,HttpServletResponse res) throws Exception{
 		HttpSession session = req.getSession();//セッション
 		Subject subject  = (Subject) req.getAttribute("subject");
-		SubjectDao.save(subject);
+		SubjectDao subjectDao = new SubjectDao();
+		subjectDao.save(subject);
 	    req.getRequestDispatcher("subject_update_done.jsp").forward(req, res);
 	}	
 }

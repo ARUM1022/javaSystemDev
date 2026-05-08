@@ -34,9 +34,6 @@ public class TestDao extends Dao{
 				test.setStudent(student);
 				test.setSubject(subject);
 				test.setSchool(school);
-				test.setString(rSet.getStudent().getNo());
-				test.setSubject(rSet.getString("subject_cd"));
-				test.setSchoolCd(rSet.getString("school_cd"));
 				test.setNo(rSet.getInt("no"));
 				test.setPoint(rSet.getInt("point"));
 				test.setClassNum(rSet.getString("class_num"));
@@ -70,7 +67,6 @@ public class TestDao extends Dao{
 					statement.setString(2, subject.getCd());
 					statement.setString(3, classNum);
 					statement.setInt(4,no);
-					statement.setInt(5, entYear);
 					//プライベートステートメントを実行
 					rSet = statement.executeQuery();
 					//リストへの格納処理を実行
@@ -101,9 +97,7 @@ public class TestDao extends Dao{
 				for (Test test : list) {
 				//データベースから学取得
 			Test old = get(test.getStudent(),test.getNo());
-		try { 
 			//データベースから学取得
-			Test old = get(Test.getSubject());
 			if (old == null) {
 				//結果が存在しなかった場合
 				//プリペアードステートメントにINSERT文をセット
@@ -111,20 +105,13 @@ public class TestDao extends Dao{
 						"insert into test(student_no,subject_cd,school_cd,no,point,class_num) values(?, ?, ?, ?, ?, ?)");
 				//プリペアードステートメントに値をバインド
 				
-				
-				
 				statement.setString(1,test.getStudent().getNo());
 				statement.setString(2,test.getSubject().getCd());
 				statement.setString(3,test.getSchool().getCd());
 				statement.setInt(4, test.getNo());
 				statement.setInt(5,test.getPoint());
 				statement.setString(6,test.getClassNum());
-				statement.setString(1,Test.getStudentNo());
-				statement.setString(2,Test.getSubjectCd());
-				statement.setString(3,Test.getSchoolCd());
-				statement.setInt(4, Test.getNo());
-				statement.setInt(5,Test.getPoint());
-				statement.setString(6,Test.getClassNum());
+				
 			} else {
 				//結果が存在した場合
 				//プリペアードステートメントにUPDATE文をセット
@@ -141,15 +128,9 @@ public class TestDao extends Dao{
 				statement.setString(8,test.getSubject().getCd());
 				statement.setInt(9,test.getNo());
 				}
-				count = statement.executeUpdate();
-				}
-				statement.setString(1,Test.getStudentNo());
-				statement.setString(2,Test.getSubjectCd());
-				statement.setString(3,Test.getSchoolCd());
-				statement.setInt(4, Test.getNo());
-				statement.setInt(5,Test.getPoint());
-				statement.setString(6,Test.getClassNum());
-			}
+			count = statement.executeUpdate();
+		}
+				
 
 			} catch(Exception e) { 
 				throw e;

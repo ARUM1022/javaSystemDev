@@ -1,12 +1,8 @@
 package scoremanager.main;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-<<<<<<< HEAD
-=======
-import org.eclipse.tags.shaded.org.apache.xpath.operations.String;
-
->>>>>>> branch 'master' of https://github.com/ARUM1022/javaSystemDev.git
 import bean.School;
 import bean.Subject;
 import bean.Teacher;
@@ -16,12 +12,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import tool.Action;
 
-<<<<<<< HEAD
-public class SubjectListAction extends Action {
 	
-=======
-public class SubjecListAction extends Action {	
->>>>>>> branch 'master' of https://github.com/ARUM1022/javaSystemDev.git
+public class SubjectListAction extends Action {	
 	@Override
 	public void execute(HttpServletRequest req,HttpServletResponse res) throws Exception{
 		HttpSession session = req.getSession();//セッション
@@ -43,22 +35,16 @@ public class SubjecListAction extends Action {
 		teacher.setPassword("password");
 		teacher.setName("管理者");
 		teacher.setSchool(school);
-<<<<<<< HEAD
-		Subject subjects = new Subject();
+		SubjectDao subjectDao = new SubjectDao();
 		
-=======
 		List<Subject> subjects = null;
->>>>>>> branch 'master' of https://github.com/ARUM1022/javaSystemDev.git
 
 		Map<String, String> errors = new HashMap<>();//エラーメッセージ	
 			// 所属校の全科目情報を取得
-<<<<<<< HEAD
-			subjects = SubjectDao.filter(teacher.getSchool(), false);
-=======
-			subjects = SubjectDao.filter(teacher.getSchool());
+			subjects = subjectDao.filter(teacher.getSchool(), false);
+			subjects = subjectDao.filter(teacher.getSchool(),true);
 			//JSPへフォワード
 		    req.getRequestDispatcher("subject_list.jsp").forward(req, res);
->>>>>>> branch 'master' of https://github.com/ARUM1022/javaSystemDev.git
 
 	}	
 }

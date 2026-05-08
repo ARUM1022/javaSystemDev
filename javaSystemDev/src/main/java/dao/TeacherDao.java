@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-
 import bean.Teacher;
 
 public class TeacherDao extends Dao{
@@ -24,8 +23,10 @@ public class TeacherDao extends Dao{
 			statement.setString(1,id);
 			//プリペアードステートメントを実行
 			ResultSet rs = statement.executeQuery();
+			if(rs.next()) {
 			teacher.setName(rs.getString("name"));
 			//後始末
+			}
 			statement.close();
 			connection.close();
 		} catch (Exception e) {
@@ -37,7 +38,6 @@ public class TeacherDao extends Dao{
 	public Teacher Login(String id, String password) throws Exception{
 		//validでidpassの組み合わせあるか返す
 		boolean valid = false;
-		valid = false;
 		Teacher teacher = new Teacher();
 		//データベースへのコネクションを確立
 		Connection connection = getConnection();
@@ -64,9 +64,6 @@ public class TeacherDao extends Dao{
 		} catch (Exception e) {
 			throw e;
 		}
-		return valid;
-	}
-	finally (){
 		return teacher;
 	}
 }

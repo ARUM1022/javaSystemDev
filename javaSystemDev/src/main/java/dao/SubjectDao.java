@@ -34,7 +34,7 @@ public class SubjectDao extends Dao{
 	}
 	
 
-	public List<Subject> filter(School school,boolean isAttend) throws Exception{
+	public Subject filter(School school,boolean isAttend) throws Exception{
 		//リストを初期化
 				List<Subject> list = new ArrayList<>();
 				//コネクションを確率
@@ -67,7 +67,7 @@ public class SubjectDao extends Dao{
 						}
 					}
 				}
-				return list;
+				return (Subject) list;
 	}
 
 //Saveメソッド
@@ -80,7 +80,7 @@ public class SubjectDao extends Dao{
 		int count = 0;
 		try {
 			//データベースから科目を取得
-			Subject old = get(Subject.getCd());
+			Subject old = get(subject.getCd(), subject.getSchool());
 			if (old == null) {
 				//科目が存在しなかった場合
 				//プリペアードステートメントにINSERT文をセット
