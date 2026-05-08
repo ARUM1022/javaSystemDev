@@ -8,15 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 //ここにまだimportが追加される可能性あり
 
-import org.eclipse.tags.shaded.org.apache.xpath.operations.String;
-
 import bean.Subject;
 import bean.Test;
 import bean.TestListSubject;
 
 public class TestListSubjectDao extends Dao{
 	
-	private String baseSql = "select * from test where subject_cd=?";
+
 
 	
 	private List<TestListSubject> postFilter(ResultSet rSet, Test test) throws Exception{
@@ -49,13 +47,13 @@ public class TestListSubjectDao extends Dao{
 				ResultSet rSet = null;
 				try {
 					//プリペアードステートメントにSQL文をセット
-					statement = connection.prepareStatement(baseSql);
+					statement = connection.prepareStatement("select * from test where subject_cd=?");
 					//プリペアードステートメントに学生番号をバインド
 					statement.setString(1, subject.getCd());
 					//プライベートステートメントを実行
 					rSet = statement.executeQuery();
 					//リストへの格納処理を実行
-					list = postFilter(rSet,test);
+					list = postFilter(rSet);
 				} catch (Exception e) {
 					throw e;
 				} finally {
