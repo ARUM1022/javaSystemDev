@@ -22,6 +22,6 @@ public class SubjectUpdateAction extends Action{
 		subject.setCd(cd);
 		
 		req.setAttribute("subject", subject);
-		req.getRequestDispatcher("/scoremanager/main/subject_update.jsp").forward(req,res);
+		req.getRequestDispatcher("subject_update.jsp").forward(req,res);
 	}
 }
