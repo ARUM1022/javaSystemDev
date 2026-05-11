@@ -12,10 +12,6 @@
   <h2 class="h3 mb-3 fw-normal bg-secondary bg-opacity-10 py-2 px-4">科目登録</h2>
 <%-- ここまでがテンプレ --%>
 <%-- ここからが天ぷら --%>
-
-<%
- int currentYear = LocalDate.now().getYear();
-%>
 <%-- ↑年月日をfmtに格納 --%>
 <%-- sessionを有効にする↓これによって他のページに遷移したときでも、ログイン情報は維持される --%>
   <% bean.User user = (bean.User)session.getAttribute("user"); %>

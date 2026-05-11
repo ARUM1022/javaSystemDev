@@ -41,10 +41,10 @@ public class SubjectListAction extends Action {
 
 		Map<String, String> errors = new HashMap<>();//エラーメッセージ	
 			// 所属校の全科目情報を取得
-			subjects = subjectDao.filter(teacher.getSchool(), false);
-			subjects = subjectDao.filter(teacher.getSchool(),true);
-			//JSPへフォワード
-		    req.getRequestDispatcher("subject_list.jsp").forward(req, res);
+			subjects = subjectDao.filter(teacher.getSchool());
+				req.setAttribute("subjects",subjects);
+				//JSPへフォワード
+				req.getRequestDispatcher("subject_list.jsp").forward(req, res);
 
 	}	
 }

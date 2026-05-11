@@ -35,15 +35,22 @@ public class SubjectCreateExecuteAction  extends Action {
 		teacher.setName("管理者");
 		teacher.setSchool(school);
 		
-		Subject subjects = new Subject();
+		Subject subject= new Subject();
+		String cd = req.getParameter("cd");
+		String name = req.getParameter("name");
+		subject.setName(name);
+		subject.setCd(cd);
+		subject.setSchool(teacher.getSchool());
 		SubjectDao sDao = new SubjectDao();
-		
-		Map<String, String> errors = new HashMap<>();//エラーメッセージ	
-			// 所属校の全科目情報を取得
-			subjects = sDao.filter(teacher.getSchool(), false);
-		Subject subject  = (Subject) req.getAttribute("subject");
-		sDao.save(subject);
-	    req.getRequestDispatcher("subject_create_done.jsp").forward(req, res);
 
+		Map<String, String> errors = new HashMap<>();//エラーメッセージ	
+
+		try {
+			sDao.save(subject);
+		    req.getRequestDispatcher("subject_create_done.jsp").forward(req, res);
+		} catch (Exception e) {
+			req.setAttribute("error", errors);
+			req.getRequestDispatcher("error.jsp").forward(req,res);
+		}
 	}	
 }
