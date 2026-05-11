@@ -1,7 +1,4 @@
 package scoremanager.main;
-import java.util.HashMap;
-import java.util.Map;
-
 import bean.School;
 import bean.Subject;
 import bean.Teacher;
@@ -43,13 +40,11 @@ public class SubjectCreateExecuteAction  extends Action {
 		subject.setSchool(teacher.getSchool());
 		SubjectDao sDao = new SubjectDao();
 
-		Map<String, String> errors = new HashMap<>();//エラーメッセージ	
-
 		try {
 			sDao.save(subject);
 		    req.getRequestDispatcher("subject_create_done.jsp").forward(req, res);
 		} catch (Exception e) {
-			req.setAttribute("error", errors);
+			req.setAttribute("error", e);
 			req.getRequestDispatcher("error.jsp").forward(req,res);
 		}
 	}	

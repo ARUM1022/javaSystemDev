@@ -107,7 +107,7 @@ public class StudentListAction extends Action {
 		//JSPへフォワード
 		session.setAttribute("students",students);
 		
-	    req.getRequestDispatcher("student_list.jsp").forward(req, res);
+	    req.getRequestDispatcher("/scoremanager/main/student_list.jsp").forward(req, res);
 
 	}	
 }

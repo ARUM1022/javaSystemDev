@@ -45,6 +45,9 @@ public class SubjectListAction extends Action {
 				req.setAttribute("subjects",subjects);
 				//JSPへフォワード
 				req.getRequestDispatcher("subject_list.jsp").forward(req, res);
+			subjects = subjectDao.filter(teacher.getSchool());
+			//JSPへフォワード
+		    req.getRequestDispatcher("/scoremanager/main/subject_list.jsp").forward(req, res);
 
 	}	
 }

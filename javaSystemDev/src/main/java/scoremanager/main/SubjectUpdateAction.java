@@ -1,5 +1,6 @@
 package scoremanager.main;
 
+
 import bean.Subject;
 import bean.Teacher;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,6 +21,6 @@ public class SubjectUpdateAction extends Action{
 		subject.setCd(cd);
 		
 		req.setAttribute("subject", subject);
-		req.getRequestDispatcher("subject_update.jsp").forward(req,res);
+		req.getRequestDispatcher("/scoremanager/main/subject_update.jsp").forward(req,res);
 	}
 }
