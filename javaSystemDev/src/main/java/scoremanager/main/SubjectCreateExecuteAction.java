@@ -2,6 +2,8 @@ package scoremanager.main;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.tags.shaded.org.apache.xpath.operations.String;
+
 import bean.School;
 import bean.Subject;
 import bean.Teacher;
@@ -43,7 +45,7 @@ public class SubjectCreateExecuteAction  extends Action {
 			subjects = sDao.filter(teacher.getSchool(), false);
 		Subject subject  = (Subject) req.getAttribute("subject");
 		sDao.save(subject);
-	    req.getRequestDispatcher("subject_create_done.jsp").forward(req, res);
+	    req.getRequestDispatcher("/scoremanager/main/subject_create_done.jsp").forward(req, res);
 
 	}	
 }

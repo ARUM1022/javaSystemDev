@@ -14,9 +14,9 @@ public class SubjectDeleteExecuteAction  extends Action {
 		Subject subject  = (Subject) req.getAttribute("subject");
 		SubjectDao subjectDao = new SubjectDao();
 		if(subjectDao.delete(subject) == true){
-		    req.getRequestDispatcher("subject_delete_done.jsp").forward(req, res);
+		    req.getRequestDispatcher("/scoremanager/main/subject_delete_done.jsp").forward(req, res);
 		}else {
-		    req.getRequestDispatcher("subject_delete_done.jsp").forward(req, res);
+		    req.getRequestDispatcher("/scoremanager/main/subject_delete_done.jsp").forward(req, res);
 		}
 	}	
 }

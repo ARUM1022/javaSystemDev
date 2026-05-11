@@ -14,6 +14,6 @@ public class SubjectUpdateExecuteAction  extends Action {
 		Subject subject  = (Subject) req.getAttribute("subject");
 		SubjectDao subjectDao = new SubjectDao();
 		subjectDao.save(subject);
-	    req.getRequestDispatcher("subject_update_done.jsp").forward(req, res);
+	    req.getRequestDispatcher("/scoremanager/main/subject_update_done.jsp").forward(req, res);
 	}	
 }

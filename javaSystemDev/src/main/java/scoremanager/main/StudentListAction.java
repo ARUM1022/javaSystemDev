@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.tags.shaded.org.apache.xpath.operations.String;
+
 import bean.School;
 import bean.Student;
 import bean.Teacher;
@@ -107,7 +109,7 @@ public class StudentListAction extends Action {
 		//JSPへフォワード
 		session.setAttribute("students",students);
 		
-	    req.getRequestDispatcher("student_list.jsp").forward(req, res);
+	    req.getRequestDispatcher("/scoremanager/main/student_list.jsp").forward(req, res);
 
 	}	
 }
