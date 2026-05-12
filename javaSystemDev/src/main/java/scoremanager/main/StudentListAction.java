@@ -29,7 +29,7 @@ public class StudentListAction extends Action {
 		//一時的にスクールオブジェクトを実体化する
 		School school =  new School();
 		//セッターを使って仮の学校情報を設定する
-		school.setCd("tes");
+		school.setCd("oom");
 		school.setName("テスト校");
 		
 		//一時的に講師オブジェクトを実体化する

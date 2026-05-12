@@ -185,13 +185,14 @@ public class StudentDao extends Dao{
 				//学生が存在しなかった場合
 				//プリペアードステートメントにINSERT文をセット
 				statement = connection.prepareStatement(
-					    "update student set name=?, ent_year=?, class_num=?, is_attend=? where no=?");
-
-					statement.setString(1, student.getName());
-					statement.setInt(2, student.getEntYear());
-					statement.setString(3, student.getClassNum());
-					statement.setBoolean(4, student.isAttend());
-					statement.setString(5, student.getNo());
+					    "insert into student(no,name,ent_year,class_num,is_attend,school_cd) values(?,?,?,?,?,?)");
+					
+					statement.setString(1, student.getNo());
+					statement.setString(2, student.getName());
+					statement.setInt(3, student.getEntYear());
+					statement.setString(4, student.getClassNum());
+					statement.setBoolean(5, student.isAttend());
+					statement.setString(6, student.getSchool().getCd());
 			} else {
 				//学生が存在した場合
 				//プリペアードステートメントにUPDATE文をセット

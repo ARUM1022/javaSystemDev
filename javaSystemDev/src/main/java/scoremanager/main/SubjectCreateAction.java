@@ -8,7 +8,7 @@ public class SubjectCreateAction extends Action{
 	
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception{
-
+		
 		req.getRequestDispatcher("/scoremanager/main/subject_create.jsp").forward(req,res);
 	}
 }
