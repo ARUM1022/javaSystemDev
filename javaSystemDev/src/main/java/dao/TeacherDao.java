@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import org.eclipse.tags.shaded.org.apache.xpath.operations.String;
+
 import bean.Teacher;
 
 public class TeacherDao extends Dao{
@@ -54,7 +56,8 @@ public class TeacherDao extends Dao{
 			ResultSet rs = statement.executeQuery();
 			//リザルトセットが存在するならログイン成功
 			if (rs.next()){
-					;
+					teacher.setId(rs.getString(id));
+					teacher.setPassword(rs.getString(password));
 				} else {
 					teacher = null;
 				}
