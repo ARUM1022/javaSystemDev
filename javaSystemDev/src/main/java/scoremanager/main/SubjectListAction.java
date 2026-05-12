@@ -3,8 +3,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.tags.shaded.org.apache.xpath.operations.String;
-
 import bean.School;
 import bean.Subject;
 import bean.Teacher;
@@ -43,8 +41,11 @@ public class SubjectListAction extends Action {
 
 		Map<String, String> errors = new HashMap<>();//エラーメッセージ	
 			// 所属校の全科目情報を取得
-			subjects = subjectDao.filter(teacher.getSchool(), false);
-			subjects = subjectDao.filter(teacher.getSchool(),true);
+			subjects = subjectDao.filter(teacher.getSchool());
+				req.setAttribute("subjects",subjects);
+				//JSPへフォワード
+				req.getRequestDispatcher("subject_list.jsp").forward(req, res);
+			subjects = subjectDao.filter(teacher.getSchool());
 			//JSPへフォワード
 		    req.getRequestDispatcher("/scoremanager/main/subject_list.jsp").forward(req, res);
 

@@ -34,7 +34,7 @@ public class SubjectDao extends Dao{
 	}
 	
 
-	public Subject filter(School school,boolean isAttend) throws Exception{
+	public List<Subject> filter(School school) throws Exception{
 		//リストを初期化
 				List<Subject> list = new ArrayList<>();
 				//コネクションを確率
@@ -67,7 +67,7 @@ public class SubjectDao extends Dao{
 						}
 					}
 				}
-				return (Subject) list;
+				return  list;
 	}
 
 //Saveメソッド

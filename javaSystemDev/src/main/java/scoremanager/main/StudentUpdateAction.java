@@ -21,11 +21,11 @@ public class StudentUpdateAction extends Action {
 		Teacher teacher = (Teacher) session.getAttribute("user");
 		String entYear = String.valueOf(student.getEntYear());
 		String name = student.getName();
-		List<String> class_num = cDao.filter(teacher.getSchool());
+		List<String> classList = cDao.filter(teacher.getSchool());
 		req.setAttribute("ent_year",entYear);
 		req.setAttribute("no",no);
 		req.setAttribute("name",name);
-		req.setAttribute("class_num", class_num);
+		req.setAttribute("classList", classList);
 		req.getRequestDispatcher("/scoremanager/main/student_update.jsp").forward(req,res);
 	}
 }

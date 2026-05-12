@@ -21,8 +21,8 @@
     	<br><label>クラス</label><br>
     	<select name="class_num" type="select">
     	 <c:forEach var="s" items="${classList}">
-    	  <option value="${s}">${s}</option>
-   		 </c:forEach> 
+   	 		<option value="${s}">${s}</option>
+   		</c:forEach>
     	</select><br>
     	<label>在学中</label>
     	<input class="form-check-input" type="checkbox" name = "is_attend">
