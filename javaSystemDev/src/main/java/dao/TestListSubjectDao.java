@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 //ここにまだimportが追加される可能性あり
 
-import bean.Student;
+import bean.Subject;
 import bean.TestListSubject;
 
 public class TestListSubjectDao extends Dao{
@@ -35,7 +35,7 @@ public class TestListSubjectDao extends Dao{
 	}
 
 //filterメソッド	
-	public List<TestListSubject> filter(Student student) throws Exception{
+	public List<TestListSubject> filter(Subject subject) throws Exception{
 		//リストを初期化
 				List<TestListSubject> list = new ArrayList<>();
 				//コネクションを確率
@@ -48,7 +48,7 @@ public class TestListSubjectDao extends Dao{
 					//プリペアードステートメントにSQL文をセット
 					statement = connection.prepareStatement("select * from test where subject_cd=?");
 					//プリペアードステートメントに学生番号をバインド
-					statement.setString(1, student.getNo());
+					statement.setString(1, subject.getCd());
 					//プライベートステートメントを実行
 					rSet = statement.executeQuery();
 					//リストへの格納処理を実行
@@ -60,6 +60,7 @@ public class TestListSubjectDao extends Dao{
 					if (statement != null) {
 						try {
 							statement.close();
+							connection.close();
 						}catch(SQLException sqle) {
 							throw sqle;
 						}

@@ -1,8 +1,9 @@
 package scoremanager.main;
 import bean.Student;
 import bean.Test;
+import bean.TestListStudent;
 import dao.StudentDao;
-import dao.TestDao;
+import dao.TestListStudentDao;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -28,12 +29,13 @@ public class TestListStudentAction extends Action {
 		Student st=new Student();
 		StudentDao sDao= new StudentDao();
 		st=sDao.get(req.getStudent());
+		List<TestListStudent> tests= new List<TestListStudent>();
 		//Daoから成績を引っ張る
-		TestDao tDao=new TestDao();
+		TestListStudentDao tDao=new TestListStudentDao();
 		try {
-			tDao.get(st,1);
-			tDao.get(st, 2);
-		    req.getRequestDispatcher("test_list_student.jsp").forward(req, res);
+			tests=tDao.filter(st);
+			tests=res.setAttribute("tests");
+		    req.getRequestDispatcher("/scoremanager/main/test_list.jsp").forward(req, res);
 		} catch (Exception e) {
 			req.setAttribute("error", e);
 			req.getRequestDispatcher("error.jsp").forward(req,res);
