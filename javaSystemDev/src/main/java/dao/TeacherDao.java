@@ -38,8 +38,6 @@ public class TeacherDao extends Dao{
 	}
 //Loginメソッド
 	public Teacher Login(String id, String password) throws Exception{
-		//validでidpassの組み合わせあるか返す
-		boolean valid = false;
 		Teacher teacher = new Teacher();
 		//データベースへのコネクションを確立
 		Connection connection = getConnection();
