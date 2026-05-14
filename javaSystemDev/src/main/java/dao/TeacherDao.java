@@ -52,10 +52,15 @@ public class TeacherDao extends Dao{
 			statement.setString(2,password);
 			//プリペアードステートメントを実行
 			ResultSet rs = statement.executeQuery();
+			
 			//リザルトセットが存在するならログイン成功
 			if (rs.next()){
 					teacher.setId(rs.getString(id));
 					teacher.setPassword(rs.getString(password));
+					String name=new String();
+					teacher.setName(rs.getString(name));
+					String school_cd=new String();
+					teacher.setSchool(SchoolDao.get(rs.getString(school_cd)));
 				} else {
 					teacher = null;
 				}
