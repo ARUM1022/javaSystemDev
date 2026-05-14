@@ -20,9 +20,12 @@ public class LoginExecuteAction extends Action {
         try {
         Teacher teacher = tdao.Login(id, password);
         if ( teacher != null ) {
+        	Teacher name = (Teacher)tdao.Get(id);
             // 2. 教師情報を取得
 //            System.out.println(teacher);
                        // 3. セッションに格納
+        	teacher.setAuthenticated(true);
+        	teacher.setName(name.getName());
             System.out.println("exeAction" + teacher);
             System.out.println("exeAction" + teacher.getSchool());
                 session.setAttribute("user", teacher);
