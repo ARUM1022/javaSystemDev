@@ -51,6 +51,7 @@ public class TeacherDao extends Dao{
 			statement.setString(2,password);
 			//プリペアードステートメントを実行
 			ResultSet rs = statement.executeQuery();
+			
 			//リザルトセットが存在するならログイン成功
 			if (rs.next()){
 					teacher.setId(rs.getString("id"));
@@ -60,7 +61,7 @@ public class TeacherDao extends Dao{
 					teacher.setSchool(school);
 					System.out.println("DAO" + teacher);
 					System.out.println("DAO" + teacher.getSchool());
-				} else {
+			} else {
 					teacher = null;
 				}
 			//後始末
