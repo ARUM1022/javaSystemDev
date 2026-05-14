@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import bean.School;
 import bean.Student;
 import bean.Teacher;
 import dao.ClassNumDao;
@@ -20,35 +19,34 @@ public class StudentListAction extends Action {
 	
 	@Override
 	public void execute(HttpServletRequest req,HttpServletResponse res) throws Exception{
-//		HttpSession session = req.getSession();//セッション
+		HttpSession session = req.getSession();//セッション
 		//セッション属性の準備
 //		Teacher teacher = (Teacher)session.getAttribute("user");
 		//セッション属性のuser情報をTeacherオブジェクト変数に代入
-//		Teacher teacher = (Teacheer)session.getAttribute("user")
+		Teacher teacher = (Teacher)session.getAttribute("user");
 		
 		//一時的にスクールオブジェクトを実体化する
-		School school =  new School();
+//		School school =  new School();
 		//セッターを使って仮の学校情報を設定する
-		school.setCd("oom");
-		school.setName("テスト校");
+//		school.setCd("tes");
+//		school.setName("テスト校");
 		
 		//一時的に講師オブジェクトを実体化する
-		Teacher teacher = new Teacher();
+//		Teacher teacher = new Teacher();
 		//セッターを使って仮の講師情報を設定する
-		teacher.setId("admin1");
-		teacher.setPassword("password");
-		teacher.setName("管理者");
-		teacher.setSchool(school);
-		Student student= new Student();
-		student.setNo("0");
-		student.setClassNum("1010");
-		student.setName("テスト学生");
-		student.setisAttend(true);
-		student.setEntYear(2020);
-		student.setSchool(school);
-		HttpSession session = req.getSession();
+//		teacher.setId("admin1");
+//		teacher.setPassword("password");
+//		teacher.setName("管理者");
+//		teacher.setSchool(school);
+//		Student student= new Student();
+//		student.setNo("0");
+//		student.setClassNum("1010");
+//		student.setName("テスト学生");
+//		student.setisAttend(true);
+//		student.setEntYear(2020);
+//		student.setSchool(school);
+//		HttpSession session = req.getSession();
 		session.setAttribute("user",teacher);
-		
 		//ローカル変数の指定
 		String entYearStr = "";//入力された入学年度
 		String classNum = "";//入力されたクラス番号
@@ -56,7 +54,7 @@ public class StudentListAction extends Action {
 		int entYear = 0;//入学年度
 		boolean isAttend = false;//在学フラグ
 		List<Student> students = new ArrayList<>();//学生リスト
-		students.add(student);
+
 		LocalDate todaysDate = LocalDate.now();//LocalDateインスタンスを取得
 		int year = todaysDate.getYear();//現在の年を取得
 		StudentDao sDao = new StudentDao();//学生Dao

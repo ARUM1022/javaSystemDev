@@ -1,14 +1,13 @@
 package dao;
-
+ 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import bean.School;
 import bean.Teacher;
-
+ 
 public class TeacherDao extends Dao{
-
+ 
 //Get メソッド
 	public Teacher Get(String id) throws Exception{
 		//Teacher初期化
@@ -19,15 +18,13 @@ public class TeacherDao extends Dao{
 		PreparedStatement statement = null;
 		try {
 			//プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement("select NAME from teacher where ID=?");
+			statement = connection.prepareStatement("select NAME from TEACHER where ID=?");
 			//プリペアードステートメントに学生番号をバインド
 			statement.setString(1,id);
 			//プリペアードステートメントを実行
 			ResultSet rs = statement.executeQuery();
-			if(rs.next()) {
 			teacher.setName(rs.getString("name"));
 			//後始末
-			}
 			statement.close();
 			connection.close();
 		} catch (Exception e) {
@@ -37,6 +34,7 @@ public class TeacherDao extends Dao{
 	}
 //Loginメソッド
 	public Teacher Login(String id, String password) throws Exception{
+		//validでidpassの組み合わせあるか返す
 		Teacher teacher = new Teacher();
 		//データベースへのコネクションを確立
 		Connection connection = getConnection();
@@ -44,32 +42,18 @@ public class TeacherDao extends Dao{
 		PreparedStatement statement = null;
 		try {
 			//プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement("select * from teacher where ID=? and PASSWORD=?");
+			statement = connection.prepareStatement("select * from TEACHER where ID=? and PASSWORD=?");
 			//プリペアードステートメントにIDをバインド
 			statement.setString(1,id);
 			//プリペアードステートメントにパスをバインド
 			statement.setString(2,password);
 			//プリペアードステートメントを実行
 			ResultSet rs = statement.executeQuery();
-			
 			//リザルトセットが存在するならログイン成功
 			if (rs.next()){
-					teacher.setId(rs.getString("id"));
-					teacher.setPassword(rs.getString("password"));
-<<<<<<< HEAD
-					teacher.setName(rs.getString("name"));
-					teacher.setSchool(SchoolDao.get(rs.getString("school_cd")));
-				} else {
-=======
-					School school = new School();
-					school.setCd(rs.getString("school_cd"));
-					teacher.setSchool(school);
-					System.out.println("DAO" + teacher);
-					System.out.println("DAO" + teacher.getSchool());
-			} else {
->>>>>>> branch 'master' of https://github.com/ARUM1022/javaSystemDev.git
-					teacher = null;
-				}
+				teacher.setId(rs.getString("id")); 
+				teacher.setPassword(rs.getString("password")); 
+			}
 			//後始末
 			statement.close();
 			connection.close();

@@ -11,18 +11,18 @@
   <section class="me-4">
    <h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">ログイン</h2>
 	<!-- 1. methodをpostに変更 -->
-	<form action="Login.action" method="post">
+	<form action="LoginExecute.action" method="post">
 	    
 	    <div class="mb-3">
 	        <label>ID</label>
 	        <!-- 2. nameを "login" に固定 -->
-	        <input type="text" name="login" class="form-control">
+	        <input type="text" name="login" class="form-control" value= "${ id}">
 	    </div>
 	    
 	    <div class="mb-3">
 	        <label>パスワード</label>
 	        <!-- 3. nameを "password" に固定 -->
-	        <input type="password" name="password" class="form-control">
+	        <input type="password" name="password" class="form-control" value= "${ password}">
 	    </div>
 	    
 	    <div class="mb-3">

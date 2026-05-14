@@ -1,5 +1,6 @@
 package scoremanager.main;
 
+import java.time.LocalDate;
 import bean.Subject;
 import bean.School;
 import bean.Student;
@@ -33,6 +34,8 @@ public class TestListAction extends Action {
 		SubjectDao sDao=new SubjectDao();
 		subjectSet=sDao.filter(school);
 		//リストを初期化
+		LocalDate todaysDate = LocalDate.now();//LocalDateインスタンスを取得
+		int year = todaysDate.getYear();
 		List<Integer> entYearSet = new ArrayList<>();
 		//10年前　から1年後まで年をリストに追加
 		for(int i = year - 10; i < year + 1; i++) {
