@@ -20,7 +20,7 @@ public class TestListSubjectAction extends Action {
 		TestListSubjecDao tDao=new TestListSubjectDao();
 		try {
 			tests=tDao.filter(subject);
-			tests=res.setAttribute("tests");
+			res.setAttribute("tests",tests);
 		    req.getRequestDispatcher("/scoremanager/main/test_list.jsp").forward(req, res);
 		} catch (Exception e) {
 			req.setAttribute("error", e);

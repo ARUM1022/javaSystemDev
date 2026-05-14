@@ -38,9 +38,9 @@ public class TestListAction extends Action {
 		for(int i = year - 10; i < year + 1; i++) {
 			entYearSet.add(i);
 		}
-		entYearSet=req.setAttribute("f1");
-		classNumSet=req.setAtribute("f2");
-		subjectSet=req.setAttribute("f3");
+		req.setAttribute("f1",entYearSet);
+		req.setAtribute("f2",classNumSet);
+		req.setAttribute("f3",subjectSet);
 //フォワード
 		req.getRequestDispatcher("/scoremanager/main/test_list.jsp").forward(req, res);
 		
