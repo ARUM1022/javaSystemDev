@@ -29,10 +29,10 @@ public class TestListStudentAction extends Action {
 		test.setStudent(student);
 		test.setNo(0);
 		test.setPoint(0);
-		//学生番号から生徒を逆引き
-		Student st=new Student();
 		StudentDao sDao= new StudentDao();
-		st=sDao.get(req.getStudent());
+
+		//学生番号から生徒を逆引き
+		Student st=(Student) sDao.get(student.getNo());
 		List<TestListStudent> tests= new ArrayList<TestListStudent>();
 		//Daoから成績を引っ張る
 		TestListStudentDao tDao=new TestListStudentDao();
