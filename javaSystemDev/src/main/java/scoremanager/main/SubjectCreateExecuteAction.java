@@ -1,4 +1,5 @@
 package scoremanager.main;
+
 import bean.Subject;
 import bean.Teacher;
 import dao.SubjectDao;
@@ -29,7 +30,7 @@ public class SubjectCreateExecuteAction  extends Action {
 
 		try {
 			sDao.save(subject);
-		    req.getRequestDispatcher("subject_create_done.jsp").forward(req, res);
+		    req.getRequestDispatcher("/scoremanager/main/subject_create_done.jsp").forward(req, res);
 		} catch (Exception e) {
 			req.setAttribute("error", e);
 			req.getRequestDispatcher("error.jsp").forward(req,res);

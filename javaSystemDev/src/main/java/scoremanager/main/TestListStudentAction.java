@@ -27,12 +27,11 @@ public class TestListStudentAction extends Action {
 		//セッターを使って仮の学校情報を設定する
 		Student student = (Student)req.getAttribute("student");
 		test.setStudent(student);
-		test.setNo(0);
-		test.setPoint(0);
-		StudentDao sDao= new StudentDao();
-
+		
+		Student st = new Student();
+		StudentDao sDao = new StudentDao();
 		//学生番号から生徒を逆引き
-		Student st=(Student) sDao.get(student.getNo());
+		st=sDao.get(req.getParameter("student"));
 		List<TestListStudent> tests= new ArrayList<TestListStudent>();
 		//Daoから成績を引っ張る
 		TestListStudentDao tDao=new TestListStudentDao();
