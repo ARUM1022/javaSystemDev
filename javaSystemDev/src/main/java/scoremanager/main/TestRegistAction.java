@@ -5,6 +5,7 @@ import java.util.List;
 import bean.School;
 import bean.Subject;
 import bean.Teacher;
+import bean.Test;
 import dao.ClassNumDao;
 import dao.SubjectDao;
 import dao.TestDao;
@@ -52,6 +53,7 @@ public class TestRegistAction extends Action{
 		
 		//↓SubjectDaoで科目を取得、Listに格納
 		SubjectDao sDao = new SubjectDao();
+		Subject subject = sDao.get(subjectCd, school);
 		List<Subject> subjectSet = sDao.filter(school);
 		req.setAttribute("subject_set", subjectSet);
 		
@@ -59,6 +61,9 @@ public class TestRegistAction extends Action{
 		if (entYear==null||entYear.equals("0") ||classNum==null|| classNum.equals("0") ||subjectCd==null|| subjectCd.equals("0") ||testno==null|| testno.equals("0")) {
 		
 			TestDao tDao = new TestDao();
+			List<Test> test = tDao.filter(Integer.parseInt(entYear), classNum,subject , Integer.parseInt(testno), school);
+			req.setAttribute("c", test);
+		}else {
 			req.setAttribute("error", "未選択があります");
 			
 		}

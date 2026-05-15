@@ -57,7 +57,7 @@ public class TestDao extends Dao{
 				//リザルトセット
 				ResultSet rSet = null;
 				//SQL文の条件
-				String condition = "and class_num=? and no=? ";	
+				String condition = " and class_num=? and no=? ";	
 				
 				try {
 					//プリペアードステートメントにSQL文をセット

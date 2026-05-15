@@ -94,11 +94,11 @@ public class SubjectDao extends Dao{
 				//科目が存在した場合
 				//プリペアードステートメントにUPDATE文をセット
 				statement = connection
-						.prepareStatement("update student set no=?, name=?, school=?");
+						.prepareStatement("update subject set name=?, school_cd=?, school=?");
 				//プリペアードステートメントに値をバインド
-				statement.setString(1,subject.getCd());
-				statement.setString(2,subject.getName());
-				statement.setString(3,subject.getSchool().getCd());
+				statement.setString(1,subject.getName());
+				statement.setString(2,subject.getSchool().getCd());
+				statement.setString(3,subject.getCd());
 			} 
 			//プリペアードステートメントを実行
 			count = statement.executeUpdate();
@@ -172,7 +172,7 @@ public class SubjectDao extends Dao{
 			throw e;
 		}finally{
 			//プリペアードステートメントを閉じる
-			if( connection != null) {
+			if(statement != null) {
 				try {
 					statement.close();
 				}catch (SQLException sqle){
@@ -193,7 +193,7 @@ public class SubjectDao extends Dao{
 		int count = 0;
 		try {
 			//ステートメント準備
-			statement = connection.prepareStatement("delete * from subject where cd=?");
+			statement = connection.prepareStatement("delete from subject where cd=?");
 			statement.setString(1,subject.getCd());
 			count = statement.executeUpdate();
 		} catch(Exception e) { 
