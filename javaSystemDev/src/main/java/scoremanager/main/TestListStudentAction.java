@@ -30,7 +30,7 @@ public class TestListStudentAction extends Action {
 		//学生番号から生徒を逆引き
 		Student st=new Student();
 		StudentDao sDao= new StudentDao();
-		st=sDao.get(req.getStudent());
+		st=sDao.get(req.getAttribute("student"));
 		List<TestListStudent> tests= new List<TestListStudent>();
 		//Daoから成績を引っ張る
 		TestListStudentDao tDao=new TestListStudentDao();
