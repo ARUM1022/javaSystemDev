@@ -5,6 +5,7 @@ import bean.Test;
 import bean.TestListStudent;
 import dao.StudentDao;
 import dao.TestListStudentDao;
+import java.util.List
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -23,7 +24,7 @@ public class TestListStudentAction extends Action {
 		//成績オブジェクトを実体化する
 		Test test =  new Test();
 		//セッターを使って仮の学校情報を設定する
-		test.setStudent(req.getStudent());
+		test.setStudent(req.getAttribute("student"));
 		test.setNo(0);
 		test.setPoint(0);
 		//学生番号から生徒を逆引き
