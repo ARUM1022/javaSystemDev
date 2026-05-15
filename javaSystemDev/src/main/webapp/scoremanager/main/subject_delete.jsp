@@ -20,7 +20,7 @@
 <%-- sessionを有効にする↓これによって他のページに遷移したときでも、ログイン情報は維持される --%>
   <% bean.User user = (bean.User)session.getAttribute("user"); %>
  <%-- <% if (user != null && user.isAuthenticated()){ %> --%>
- <form action="SubjectDeleteExecute.action" method="post">
+ <form action="${pageContext.request.contextPath}/scoremanager/main/SubjectDelete.action" method="post">
 　<label>科目コード{$subject.cd } {$subject.name }を削除してもよろしいですか？</label>
 　<button class="btn input=" id="filter-button">削除</button>
  </form>

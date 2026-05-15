@@ -21,7 +21,7 @@
   <% bean.User user = (bean.User)session.getAttribute("user"); %>
  <%-- <% if (user != null && user.isAuthenticated()){ %> --%>
   <label>削除が完了しました</label>
-  <a hred="SubjectList.action?">科目一覧</a>
+  <a hred="${pageContext.request.contextPath}/scoremanager/main/SubjectList.action">科目一覧</a>
 </section>
 </c:param>
 </c:import>

@@ -20,7 +20,7 @@
 <%-- sessionを有効にする↓これによって他のページに遷移したときでも、ログイン情報は維持される --%>
   <% bean.Teacher user = (bean.Teacher)session.getAttribute("user"); %>
  <% if (user != null || user.isAuthenticated()){ %> 
-  <form action="StudentCreateExecute.action" method="get">
+  <form action="${pageContext.request.contextPath}/scoremanager/main/StudentCreateExecute.action" method="get">
   <label>入学年度</label>
   <div>
   <select class="form-select" name="ent_year">
@@ -57,7 +57,7 @@
     <button type ="submit" class="btn btn-secondary">登録して終了</button>
      </form>
    <% } else{ %>
-  <a href="Login.action">この機能を使うにはログインしてください</a>
+  <a href="${pageContext.request.contextPath}/scoremanager/main/Login.action">この機能を使うにはログインしてください</a>
   <% } %>
 </section>
 </c:param>

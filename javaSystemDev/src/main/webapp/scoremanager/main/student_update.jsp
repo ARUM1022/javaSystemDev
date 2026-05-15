@@ -11,7 +11,7 @@
  <c:param name="content">
   <section class="me-4">
      <h2 class="h3 mb-3 fw-normal bg-secondary bg-opacity-10 py-2 px-4">メニュー</h2>
-    <form action="StudentUpdateExecute.action" method="get">
+    <form action="${pageContext.request.contextPath}/scoremanager/main/StudentUpdateExecute.action" method="get">
     	<label textalign="left">入学年度</label><br>
     	<input name="ent_year" value="${ent_year}" readonly><br>
     	<label>学生番号</label><br>

@@ -7,6 +7,7 @@ import bean.Subject;
 import bean.Teacher;
 import dao.ClassNumDao;
 import dao.SubjectDao;
+import dao.TestDao;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -57,6 +58,7 @@ public class TestRegistAction extends Action{
 		//↓全てデータが入力されているかを調べるだけ。気にしなくてよい
 		if (entYear==null||entYear.equals("0") ||classNum==null|| classNum.equals("0") ||subjectCd==null|| subjectCd.equals("0") ||testno==null|| testno.equals("0")) {
 		
+			TestDao tDao = new TestDao();
 			req.setAttribute("error", "未選択があります");
 			
 		}

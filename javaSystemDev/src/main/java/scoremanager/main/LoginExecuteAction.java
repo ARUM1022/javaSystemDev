@@ -26,8 +26,10 @@ public class LoginExecuteAction extends Action {
                        // 3. セッションに格納
         	teacher.setAuthenticated(true);
         	teacher.setName(name.getName());
-            System.out.println("exeAction" + teacher);
-            System.out.println("exeAction" + teacher.getSchool());
+        	
+        	//↓デバッグ用
+//            System.out.println("exeAction" + teacher);
+//            System.out.println("exeAction" + teacher.getSchool());
                 session.setAttribute("user", teacher);
                req.getRequestDispatcher("/scoremanager/main/menu.jsp").forward(req,res);
                

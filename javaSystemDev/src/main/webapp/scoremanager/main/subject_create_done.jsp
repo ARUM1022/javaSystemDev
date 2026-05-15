@@ -17,8 +17,8 @@
   <% bean.User user = (bean.User)session.getAttribute("user"); %>
  <%-- <% if (user != null && user.isAuthenticated()){ %> --%>
   <label>登録が完了しました</label>
-  <a hred="SubjectCreate.action?">戻る</a>
-  <a hred="SubjectList.action?">科目一覧</a>
+  <a href="${pageContext.request.contextPath}/scoremanager/main/SubjectList.action">戻る</a>
+  <a href="${pageContext.request.contextPath}/scoremanager/main/SubjectCreate.action">科目一覧</a>
 </section>
 </c:param>
 </c:import>

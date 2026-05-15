@@ -20,7 +20,7 @@
 <%-- sessionを有効にする↓これによって他のページに遷移したときでも、ログイン情報は維持される --%>
   <% bean.User user = (bean.User)session.getAttribute("user"); %>
  <%-- <% if (user != null && user.isAuthenticated()){ %> --%>
-  <form action="SubjectCreateExecute.action" method="get">
+  <form action="${pageContext.request.contextPath}/scoremanager/main/SubjectCreateExecute.action" method="get">
   <label>科目コード</label>
    <input type ="text" class="form-control" name="cd" value="${ cd}" required oninvalid = "this.setCustomValidity('このフィールドを入力してください')" oninput="this.setCustomValidity('')"/>
   <br>
@@ -29,7 +29,7 @@
   <br>
     <button  class="btn btn-secondary" action ="submit">登録</button>
   <%--<% } else{--%>--%>
-  <a href="Login.action">この機能を使うにはログインしてください</a>
+  <a href="${pageContext.request.contextPath}/scoremanager/main/Login.action">この機能を使うにはログインしてください</a>
   <%--<% } --%> --%>
   </form>
 </section>

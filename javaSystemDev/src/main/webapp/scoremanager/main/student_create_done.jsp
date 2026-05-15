@@ -15,7 +15,7 @@
   
 <div class="d-flex align-items-end gap-3" style="height: 200px;">
   <a href="../main/menu.jsp" class="">戻る</a>
-  <a href="StudentList.action">学生一覧</a>
+  <a href="${pageContext.request.contextPath}/scoremanager/main/StudentList.action">学生一覧</a>
   </div>
   </section>
   </c:param>

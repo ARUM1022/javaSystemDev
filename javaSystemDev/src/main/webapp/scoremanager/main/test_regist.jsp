@@ -15,7 +15,7 @@
  int currentYear = LocalDate.now().getYear();
 %>
   <h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績管理</h2>
-  <form action="TestRegist.action" method="get">
+  <form action="${pageContext.request.contextPath}/scoremanager/main/TestRagist.action" method="get">
    <div class="row border mx-3 mb-3 py-2 align-items-end rounded" id="filter">
 <div class="col-2">
     <label class="form-label" for="student-f1-select">入学年度</label>
