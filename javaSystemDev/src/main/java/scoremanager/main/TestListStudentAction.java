@@ -24,13 +24,13 @@ public class TestListStudentAction extends Action {
 		//成績オブジェクトを実体化する
 		Test test =  new Test();
 		//セッターを使って仮の学校情報を設定する
-		test.setStudent(req.getAttribute("student"));
+		test.setStudent(req.getParameter("student"));
 		test.setNo(0);
 		test.setPoint(0);
 		//学生番号から生徒を逆引き
 		Student st=new Student();
 		StudentDao sDao= new StudentDao();
-		st=sDao.get(req.getAttribute("student"));
+		st=sDao.get(req.getParameter("student"));
 		List<TestListStudent> tests= new List<TestListStudent>();
 		//Daoから成績を引っ張る
 		TestListStudentDao tDao=new TestListStudentDao();

@@ -15,7 +15,7 @@ public class TestListSubjectAction extends Action {
 		HttpSession session = req.getSession();//セッション
 //教科情報を取得
 		Subject subject=new Subject();
-		subject=req.getAttribute("subject");
+		subject=req.getParameter("subject");
 		List<TestListSubject> tests= new List<TestListSubject>();
 		//Daoから成績を引っ張る
 		TestListSubjecDao tDao=new TestListSubjectDao();
