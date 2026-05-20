@@ -74,12 +74,13 @@ public class StudentDao extends Dao{
 			throw e;
 		} finally {
 			//プリペアードステートメントを閉じる
-			if (statement != null) {
-				try {
+			if (rSet != null) {
+				rSet.close();
+			}if (statement != null) {
 					statement.close();
-				}catch(SQLException sqle) {
-					throw sqle;
-				}
+				
+			}if(connection != null) {
+				connection.close();
 			}
 		}
 		return list;
@@ -119,12 +120,12 @@ public class StudentDao extends Dao{
 					throw e;
 				} finally {
 					//プリペアードステートメントを閉じる
-					if (statement != null) {
-						try {
+					if (rSet != null) {
+						rSet.close();
+					}if (statement != null) {
 							statement.close();
-						}catch(SQLException sqle) {
-							throw sqle;
-						}
+					}if (connection != null) {
+						connection.close();
 					}
 				}
 				return list;
@@ -160,12 +161,12 @@ public class StudentDao extends Dao{
 					throw e;
 				} finally {
 					//プリペアードステートメントを閉じる
-					if (statement != null) {
-						try {
-							statement.close();
-						}catch(SQLException sqle) {
-							throw sqle;
-						}
+					if (rSet != null) {
+						rSet.close();
+					}if (statement != null) {
+							statement.close();	
+					}if (connection != null) {
+						connection.close();
 					}
 				}
 				return list;
@@ -211,7 +212,7 @@ public class StudentDao extends Dao{
 			throw e;
 		} finally {
 			//プリペアードステートメントを閉じる
-			if(statement != null) {
+						if(statement != null) {
 				try { 
 					statement.close();
 				} catch (SQLException sqle) {
@@ -244,6 +245,7 @@ public class StudentDao extends Dao{
 		Connection connection = getConnection();
 		//プリペアードステートメント
 		PreparedStatement statement = null;
+		ResultSet rSet = null;
 	
 		try {
 			//プリペアードステートメントにSQL文をセット
@@ -251,7 +253,7 @@ public class StudentDao extends Dao{
 			//プリペアードステートメントに学生番号をバインド
 			statement.setString(1,no);
 			//プリペアードステートメントを実行
-			ResultSet rSet = statement.executeQuery();
+			rSet = statement.executeQuery();
 			
 			//学校Daoを初期化
 			SchoolDao schoolDao = new SchoolDao();
@@ -275,6 +277,9 @@ public class StudentDao extends Dao{
 		}catch (Exception e){
 			throw e;
 		}finally{
+			if(rSet != null) {
+				rSet.close();
+			}
 			//プリペアードステートメントを閉じる
 			if( connection != null) {
 				try {

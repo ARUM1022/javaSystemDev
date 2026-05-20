@@ -19,7 +19,7 @@
 <%-- ↑年月日をfmtに格納 --%>
 <%-- sessionを有効にする↓これによって他のページに遷移したときでも、ログイン情報は維持される --%>
   <% bean.Teacher user = (bean.Teacher)session.getAttribute("user"); %>
- <% if (user != null || user.isAuthenticated()){ %> 
+ <% if (user != null && user.isAuthenticated()){ %> 
   <form action="${pageContext.request.contextPath}/scoremanager/main/StudentCreateExecute.action" method="get">
   <label>入学年度</label>
   <div>

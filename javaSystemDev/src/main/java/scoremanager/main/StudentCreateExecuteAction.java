@@ -1,8 +1,11 @@
 package scoremanager.main;
 
+import java.util.List;
+
 import bean.School;
 import bean.Student;
 import bean.Teacher;
+import dao.ClassNumDao;
 import dao.StudentDao;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -25,6 +28,9 @@ public class StudentCreateExecuteAction extends Action {
 		String entYearStr = req.getParameter("ent_year");
 
 		if (entYearStr == null || entYearStr.equals("0")) {
+			ClassNumDao cDao = new ClassNumDao();
+			List<String> classList = cDao.filter(teacher.getSchool());
+			req.setAttribute("classList", classList);
 		    req.setAttribute("yearError", true);
 		    req.getRequestDispatcher("/scoremanager/main/student_create.jsp").forward(req, res);
 		    return;

@@ -1,5 +1,6 @@
 package scoremanager.main;
 
+import bean.Teacher;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -11,10 +12,13 @@ public class LogoutAction extends Action{
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		
+		HttpSession session = request.getSession();
+		Teacher user = (Teacher)session.getAttribute("user");
+		user.setAuthenticated(false);
 		HttpSession user_session = request.getSession(false);
 		
 		if(user_session != null) {
+			
 			user_session.invalidate();  // セッション削除
 		}
 		
