@@ -76,15 +76,15 @@ public class StudentListAction extends Action {
 			isAttend = true;
 		}
 		//リストを初期化
-		List<Integer> entYearSet = new ArrayList<>();
+		List<Integer> ent_year_set = new ArrayList<>();
 		//10年前　から1年後まで年をリストに追加
 		for(int i = year - 10; i < year + 1; i++) {
-			entYearSet.add(i);
+			ent_year_set.add(i);
 		}
 		
 		//DBからデータ取得 3
 		//ログインユーザーの学校コードをもとにクラス番号の一覧を崇徳
-		List<String> list= cNumDao.filter(teacher.getSchool());
+		List<String> class_num_set= cNumDao.filter(teacher.getSchool());
 		
 		if (entYear != 0 && !classNum.equals("0")) {
 			//入学年度とクラス番号を指定
@@ -103,8 +103,16 @@ public class StudentListAction extends Action {
 			students = sDao.filter(teacher.getSchool(),isAttend);
 		}
 		//JSPへフォワード
-		session.setAttribute("students",students);
-		
+		// JSPへフォワード前に属性を設定
+		req.setAttribute("ent_year_set", ent_year_set);      // 入学年度セット
+		req.setAttribute("class_num_set", class_num_set);           // クラス番号セット
+		req.setAttribute("f1", entYear);                   // 選択された入学年度
+		req.setAttribute("f2", classNum);                  // 選択されたクラス
+		req.setAttribute("f3", isAttendStr);               // 選択された在学フラグ
+
+		session.setAttribute("students", students);
+
+		req.getRequestDispatcher("/scoremanager/main/student_list.jsp").forward(req, res);		
 	    req.getRequestDispatcher("/scoremanager/main/student_list.jsp").forward(req, res);
 
 	}	

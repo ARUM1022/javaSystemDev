@@ -2,6 +2,8 @@
     pageEncoding="UTF-8" %>
     <%@page import="java.time.LocalDate, java.time.format.DateTimeFormatter" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+
+<% System.out.println("JSP開始"); %>
 <c:import url="/common/base.jsp">
 <c:param name="title">
 得点管理システム
@@ -15,7 +17,7 @@
  int currentYear = LocalDate.now().getYear();
 %>
   <h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績管理</h2>
-  <form action="${pageContext.request.contextPath}/scoremanager/main/TestRagist.action" method="get">
+  <form action="${pageContext.request.contextPath}/scoremanager/main/TestRegist.action" method="get">
    <div class="row border mx-3 mb-3 py-2 align-items-end rounded" id="filter">
 <div class="col-2">
     <label class="form-label" for="student-f1-select">入学年度</label>
@@ -73,6 +75,28 @@
 	<div class="mt-2 text-warning">${errors.get("f1") }	</div>
    </div>
   </form>
+  <table class="table">
+  <tr>
+   <th>入学年度</th>
+   <th>クラス</th>
+   <th>学生番号</th>
+   <th>氏名</th>
+   <th>点数</th>
+  </tr>
+  <c:forEach var="t" items="${c}">
+  <tr>
+  <td>test</td>
+  	<%--<td>${t.student.entYear}</td>
+  	<td>${t.classNum}</td>
+  	<td>${t.student.no}</td>
+  	<td>${t.student.name}</td>
+  	<td>
+  	 <input type="text" value="${t.point }">
+  	</td>
+  	<td><a href="error.jsp">変更</a></td>--%>
+  </tr>
+  </c:forEach>
+  </table>
   
 </section>
 </c:param>

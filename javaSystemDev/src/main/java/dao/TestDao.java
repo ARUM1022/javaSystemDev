@@ -15,20 +15,23 @@ import bean.Test;
 
 public class TestDao extends Dao{
 	
-	private String baseSql = "select * from test where school_cd=? and subject_cd=?";
+	private String baseSql = "select * from test t join student s on t.student_no = s.no where t.school_cd=? and t.subject_cd=?";
 
-	
 	private List<Test> postFilter(ResultSet rSet) throws Exception{
 		List<Test> list = new ArrayList<>();
-		
+		int count = 0;
 		try {
 			while (rSet.next()) {
+				count++;
+				System.out.println(count);
 				Test test = new Test();
-				Student student = new Student();
 				Subject subject = new Subject();
 				School school = new School();
-
+				Student student = new Student();
+				
 				student.setNo(rSet.getString("student_no"));
+				student.setName(rSet.getString("name"));
+				student.setEntYear(rSet.getInt("ent_year"));
 				subject.setCd(rSet.getString("subject_cd"));
 				school.setCd(rSet.getString("school_cd"));
 				test.setStudent(student);
@@ -40,8 +43,8 @@ public class TestDao extends Dao{
 				//リストに追加
 				list.add(test);
 			}
-		}catch (SQLException | NullPointerException e) {
-			e.printStackTrace();
+		}catch (Exception e) {
+			throw e;
 		}
 		return list;
 	}
@@ -51,49 +54,62 @@ public class TestDao extends Dao{
 		//リストを初期化
 				List<Test> list = new ArrayList<>();
 				//コネクションを確率
-				Connection connection = getConnection();
+				Connection connection = null;
 				//プリペアードステートメント
 				PreparedStatement statement = null;
 				//リザルトセット
+				System.out.println("SQL開始");
 				ResultSet rSet = null;
+				System.out.println("SQL修了");
 				//SQL文の条件
-				String condition = " and class_num=? and no=? ";	
 				
 				try {
+					connection = getConnection();
 					//プリペアードステートメントにSQL文をセット
-					statement = connection.prepareStatement(baseSql + condition);
+					String sql =
+							"select t.student_no, t.subject_cd, t.school_cd, t.no, " +
+							"t.point, t.class_num, s.name, s.ent_year " +
+							"from test t " +
+							"join student s " +
+							"on t.student_no = s.no " +
+							"and t.school_cd = s.school_cd " +
+							"where t.school_cd=? " +
+							"and t.subject_cd=? " +
+							"and s.ent_year=? " +
+							"and t.class_num=? " +
+							"and t.no=?";
+					statement = connection.prepareStatement(sql);
 					//プリペアードステートメントに学校コードをバインド
 					statement.setString(1, school.getCd());
 					statement.setString(2, subject.getCd());
-					statement.setString(3, classNum);
-					statement.setInt(4,no);
+					statement.setInt(3,entYear);
+					statement.setString(4, classNum);
+					statement.setInt(5,no);
 					//プライベートステートメントを実行
 					rSet = statement.executeQuery();
 					//リストへの格納処理を実行
+					System.out.println("post前");
 					list = postFilter(rSet);
-				} catch (Exception e) {
-					throw e;
+					System.out.println("post後");
 				} finally {
 					//プリペアードステートメントを閉じる
-					if (statement != null) {
-						try {
-							statement.close();
-						}catch(SQLException sqle) {
-							throw sqle;
-						}
-					}
+				
+						if(rSet != null) rSet.close();
+					    if(statement != null) statement.close();
+					    if(connection != null) connection.close();
 				}
 				return list;
 	}
 //saveメソッド
 	public boolean save(List<Test> list) throws Exception{
 		//コネクションを確立
-		Connection connection = getConnection();
+		Connection connection = null;
 		//プリペアードステートメント
 		PreparedStatement statement = null;
 		//実行件数
 		int count = 0;
 			try { 
+				connection = getConnection();
 				for (Test test : list) {
 				//データベースから学取得
 			Test old = get(test.getStudent(),test.getNo());
@@ -167,21 +183,23 @@ public class TestDao extends Dao{
 		//得点インスタンスを初期化
 		Test test=new Test();
 		//データベースへのコネクションを確立
-		Connection connection = getConnection();
+		Connection connection = null;
 		//プリペアードステートメント
 		PreparedStatement statement = null;
 		
+		ResultSet rSet = null;
 		Subject subject = new Subject();
 		School school = new School();
 	
 		try {
+			connection = getConnection();
 			//プリペアードステートメントにSQL文をセット
 			statement = connection.prepareStatement("select * from test where student_no=? and no=?");
 			//プリペアードステートメントに学生番号をバインド
 			statement.setString(1,student.getNo());
 			statement.setInt(2,no);
 			//プリペアードステートメントを実行
-			ResultSet rSet = statement.executeQuery();
+			rSet = statement.executeQuery();
 			
 			//学校Daoを初期化
 			SchoolDao schoolDao = new SchoolDao();
@@ -208,12 +226,12 @@ public class TestDao extends Dao{
 			throw e;
 		}finally{
 			//プリペアードステートメントを閉じる
-			if( statement != null) {
-				try {
+			if (rSet != null) {
+				rSet.close();
+			}if( statement != null) {
 					statement.close();
-				}catch (SQLException sqle){
-					throw sqle;
-				}
+			}if(connection != null) {
+				connection.close();
 			}
 		}
 		return test;

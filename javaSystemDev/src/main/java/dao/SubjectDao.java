@@ -17,13 +17,12 @@ public class SubjectDao extends Dao{
 		List<Subject> list = new ArrayList<>();
 		try {
 			while (rSet.next()) {
-				SchoolDao schoolDao = new SchoolDao();
 				Subject subject =new Subject();
 				//科目インスタンスに検索結果をセット
 				subject.setCd(rSet.getString("cd"));
 				subject.setName(rSet.getString("name"));
 					//学校フィールドには学校コードで検索した学校インスタンスをセット
-				subject.setSchool(schoolDao.get(rSet.getString("school_cd")));
+				subject.setSchool(school);
 				//リストに追加
 				list.add(subject);
 			}
@@ -38,7 +37,7 @@ public class SubjectDao extends Dao{
 		//リストを初期化
 				List<Subject> list = new ArrayList<>();
 				//コネクションを確率
-				Connection connection = getConnection();
+				Connection connection = null;
 				//プリペアードステートメント
 				PreparedStatement statement = null;
 				//リザルトセット
@@ -46,6 +45,7 @@ public class SubjectDao extends Dao{
 
 				
 				try {
+					connection = getConnection();
 					//プリペアードステートメントにSQL文をセット
 					statement = connection.prepareStatement(
 							"select * from subject where school_cd=?");
@@ -59,12 +59,12 @@ public class SubjectDao extends Dao{
 					throw e;
 				} finally {
 					//プリペアードステートメントを閉じる
-					if (statement != null) {
-						try {
+					if (rSet != null) {
+						rSet.close();
+					}if (statement != null) {
 							statement.close();
-						}catch(SQLException sqle) {
-							throw sqle;
-						}
+					}if (connection != null) {
+						connection.close();
 					}
 				}
 				return  list;
@@ -73,12 +73,13 @@ public class SubjectDao extends Dao{
 //Saveメソッド
 	public boolean save(Subject subject)throws Exception{
 		//コネクションを確立
-		Connection connection = getConnection();
+		Connection connection = null;
 		//プリペアードステートメント
 		PreparedStatement statement = null;
 		//実行件数
 		int count = 0;
 		try {
+			connection = getConnection();
 			//データベースから科目を取得
 			Subject old = get(subject.getCd(), subject.getSchool());
 			if (old == null) {
@@ -136,13 +137,15 @@ public class SubjectDao extends Dao{
 		//科目インスタンスを初期化
 		Subject subject = new Subject();
 		//データベースへのコネクションを確立
-		Connection connection = getConnection();
+		Connection connection = null;
 		//プリペアードステートメント
 		PreparedStatement statement = null;
 		
+		ResultSet rSet = null;
 		SchoolDao sDao = new SchoolDao();
 	
 		try {
+			connection = getConnection();
 			//プリペアードステートメントにSQL文をセット
 			statement = connection.prepareStatement(
 					"select * from subject where school_cd=? and cd=?");
@@ -150,7 +153,7 @@ public class SubjectDao extends Dao{
 			statement.setString(1,school.getCd());
 			statement.setString(2,cd);
 			//プリペアードステートメントを実行
-			ResultSet rSet = statement.executeQuery();
+			rSet = statement.executeQuery();
 			
 			//学校Daoを初期化
 			SubjectDao subjectDao = new SubjectDao();
@@ -172,13 +175,13 @@ public class SubjectDao extends Dao{
 			throw e;
 		}finally{
 			//プリペアードステートメントを閉じる
-			if(statement != null) {
-				try {
-					statement.close();
-				}catch (SQLException sqle){
-					throw sqle;
-				}
-			}
+		if(rSet != null) {
+			rSet.close();
+		}if(statement != null) {
+				statement.close();
+		}if(connection != null) {
+			connection.close();
+		}
 		}
 		return subject;
 	}
@@ -186,12 +189,13 @@ public class SubjectDao extends Dao{
 //Deleteメソッド
 	public boolean delete(Subject subject) throws Exception{
 		//コネクションを確立
-		Connection connection = getConnection();
+		Connection connection = null;
 		//プリペアードステートメント
 		PreparedStatement statement = null;
 		//実行件数
 		int count = 0;
 		try {
+			connection = getConnection();
 			//ステートメント準備
 			statement = connection.prepareStatement("delete from subject where cd=?");
 			statement.setString(1,subject.getCd());

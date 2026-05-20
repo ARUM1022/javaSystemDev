@@ -3,7 +3,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import bean.School;
 import bean.Subject;
 import bean.Teacher;
 import dao.SubjectDao;
@@ -20,21 +19,16 @@ public class SubjectListAction extends Action {
 		//セッション属性の準備
 //		Teacher teacher = (Teacher)session.getAttribute("user");
 		//セッション属性のuser情報をTeacherオブジェクト変数に代入
-		//Teacher teacher = (Teacheer)session.getAttribute("user")
+		Teacher teacher = (Teacher)session.getAttribute("user");
 		
 		//一時的にスクールオブジェクトを実体化する
-		School school =  new School();
+//		School school =  new School();
 		//セッターを使って仮の学校情報を設定する
-		school.setCd("tes");
-		school.setName("テスト校");
 		
 		//一時的に講師オブジェクトを実体化する
-		Teacher teacher = new Teacher();
+//		Teacher teacher = new Teacher();
 		//セッターを使って仮の講師情報を設定する
-		teacher.setId("admin1");
-		teacher.setPassword("password");
-		teacher.setName("管理者");
-		teacher.setSchool(school);
+
 		SubjectDao subjectDao = new SubjectDao();
 		
 		List<Subject> subjects = null;

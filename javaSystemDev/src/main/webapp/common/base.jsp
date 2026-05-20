@@ -27,15 +27,15 @@ ${param.scripts}
 		<div class="row justify-content-center">
 			<c:choose>
 				<%-- ログイン済みの場合 --%>
-				<c:when test="${user.isAuthenticated()}">
+				<c:when test="${user != null && user.isAuthenticated()}">
 					<nav class="col-3" style="height:40rem;">
 						<c:import url="/common/navigation.jsp" />
 					</nav>
-					<main class="col-9 border-start"> ${param.content} </main>
+					<main class="col-9 border-start"> <c:out value="${param.content}" escapeXml="false"/> </main>
 				</c:when>
 				<%-- 未ログインの場合 --%>
 				<c:otherwise>
-					<main class="col-8"> ${param.content} </main>
+					<main class="col-8"><c:out value="${param.content}" escapeXml="false"/></main>
 				</c:otherwise>
 			</c:choose>
 		</div>

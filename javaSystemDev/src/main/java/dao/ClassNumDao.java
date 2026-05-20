@@ -12,9 +12,10 @@ import bean.School;
 public class ClassNumDao extends Dao{
 	public ClassNum get(String class_num, School school)throws Exception{
 		ClassNum classNum=new ClassNum();
-		Connection connection=getConnection();
+		Connection connection=null;
 		PreparedStatement statement=null;
 		try {
+			connection = getConnection();
 			statement=connection.prepareStatement("select * from class_num where class_num=? and school_cd=?");
 			statement.setString(1,class_num);
 			statement.setString(2,school.getCd());
@@ -53,12 +54,14 @@ public class ClassNumDao extends Dao{
 	}
 	public List<String>filter(School school)throws Exception{
 		List<String>list=new ArrayList<>();
-		Connection connection=getConnection();
+		Connection connection=null;
 		PreparedStatement statement=null;
+		ResultSet rSet = null;
 		try {
+			connection = getConnection();
 			statement=connection.prepareStatement("select class_num from class_num where school_cd=? order by class_num");
 			statement.setString(1,school.getCd());
-			ResultSet rSet=statement.executeQuery();
+			rSet=statement.executeQuery();
 			while (rSet.next()) {
 				list.add(rSet.getString("class_num"));
 				}
@@ -67,7 +70,13 @@ public class ClassNumDao extends Dao{
 			throw e;
 			}
 		finally {
-			if (statement !=null) {
+			if (rSet != null) {
+				try {	
+					rSet.close();
+				}catch (SQLException sqle) {
+					throw sqle;
+				}
+			}if (statement !=null) {
 				try {
 					statement.close();
 					}
